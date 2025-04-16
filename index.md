@@ -19,11 +19,12 @@ My academic and professional interests lie at the intersection of:
 - **Stochastic PDEs and Mathematical Modeling**
 
 
+## Professional History
 
 Professionally, I’ve worked across engineering, planning, and strategic roles within the gas sector, where I’ve been responsible for integrating technical expertise with long-term energy outlooks. My work spans everything from optimizing infrastructure and production systems to contributing to national energy strategies and forecasting models. 
 In these roles, I’ve often found myself at the intersection of operations, data, and strategy — acting as a bridge between day-to-day technical work and long-term planning. I’ve worked on translating complex technical details into clear, actionable insights that support investment decisions, guide strategic planning, and align with broader policy goals. 
 
-## Professional History
+
 
 - Senior Specialist – Gas Master Planning (Energy Sector) (2024-current)
 - Senior Production Planning Engineer – ADNOC Gas (2022-2024)
