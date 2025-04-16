@@ -4,7 +4,12 @@ layout: default
 
 # Rames Nagib AlJneibi - رامس نجيب الجنيبي
 
-Welcome to my personal academic blog and portfolio. I earned my Master’s in Mathematics and a Bachelor’s in Chemical Engineering, and I’m currently pursuing a Master’s in Machine Learning and preparing for a PhD in Applied Mathematics. I’m passionate about uncovering deep structures in data using mathematics, and modeling complex system mathematically. 
+Welcome to my personal and academic blog, where I explore my love for mathematics and reflect on my personal growth journey. 
+
+
+## About Me
+
+I earned my Master’s in Mathematics and a Bachelor’s in Chemical Engineering, and I’m currently pursuing a Master’s in Machine Learning and preparing for a PhD in Applied Mathematics. I’m passionate about uncovering deep structures in data using mathematics, and modeling complex system mathematically. 
 
 I’m currently focusing my Master’s thesis on **Conformal Prediction and Uncertainty Quantification**, while also exploring the intersection of **Numerical Methods for PDEs** and **Machine Learning**.  My broader ambition is to contribute to the development of rigorous, real-world **mathematical models of physical systems**, bridging theory and application in meaningful ways.
 
