@@ -22,4 +22,21 @@
   <script type="text/javascript" id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
+
+  <!-- 📱 Mobile-only post list reordering -->
+  <style>
+    @media screen and (max-width: 768px) {
+      .layout-wrapper {
+        flex-direction: column !important;
+      }
+
+      .post-list {
+        order: 1 !important;
+      }
+
+      .intro {
+        order: 2 !important;
+      }
+    }
+  </style>
 </head>
