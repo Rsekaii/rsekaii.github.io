@@ -20,12 +20,12 @@
         </aside>
 
         <!-- Main Content -->
-        <div class="main-content" style="flex: 2.5; padding-left: 10px; padding-right: 10px;">
+        <div class="main-content intro" style="flex: 2.5; padding-left: 10px; padding-right: 10px;">
           {{ content }}
         </div>
 
         <!-- Right Sidebar (Posts) -->
-        <aside class="right-sidebar" style="flex: 1.2; position: sticky; top: 100px;">
+        <aside class="right-sidebar post-list" style="flex: 1.2; position: sticky; top: 100px;">
           <!-- Mobile-only About Me post -->
           <ul class="aboutme-mobile-only" style="list-style: none; padding-left: 0; margin-top: 30px;">
             {% for post in site.posts %}
