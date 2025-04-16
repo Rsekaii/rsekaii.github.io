@@ -6,8 +6,7 @@ layout: default
 
 Welcome to my personal and academic blog, where I explore my love for mathematics and reflect on my personal growth journey. 
 
-
-## About Me
+## About me
 
 I earned my Master’s in Mathematics and a Bachelor’s in Chemical Engineering, and I’m currently pursuing a Master’s in Machine Learning and preparing for a PhD in Applied Mathematics. I’m passionate about uncovering deep structures in data using mathematics, and modeling complex system mathematically. 
 
