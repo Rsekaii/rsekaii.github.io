@@ -4,9 +4,9 @@ layout: default
 
 # Rames Nagib AlJneibi - رامس نجيب الجنيبي
 
-Welcome to my personal academic blog and portfolio. I’m currently pursuing a Master’s in Machine Learning and preparing for a PhD in Applied Mathematics. I’m passionate about uncovering deep structures in data and mathematics and applying them to real-world systems. 
+Welcome to my personal academic blog and portfolio. I earned my Master’s in Mathematics and a Bachelor’s in Chemical Engineering, and I’m currently pursuing a Master’s in Machine Learning and preparing for a PhD in Applied Mathematics. I’m passionate about uncovering deep structures in data using mathematics, and modeling complex system mathematically. 
 
-I previously earned my Master’s in Mathematics and a Bachelor’s in Chemical Engineering. Professionally, I’ve worked across engineering, planning, and strategic roles in the Gas Business where I integrate technical expertise with long-term energy outlooks.
+I’m currently focusing my Master’s thesis on **Conformal Prediction and Uncertainty Quantification**, while also exploring the intersection of **Numerical Methods for PDEs** and **Machine Learning**.  My broader ambition is to contribute to the development of rigorous, real-world **mathematical models of physical systems**, bridging theory and application in meaningful ways.
 
 ## Research & Interests
 
@@ -19,13 +19,8 @@ My academic and professional interests lie at the intersection of:
 - **Stochastic PDEs and Mathematical Modeling**
 
 
-I’m currently focusing my Master’s thesis on **Conformal Prediction and Uncertainty Quantification**, while also exploring the intersection of **Numerical Methods for PDEs** and **Machine Learning**.  
 
-My broader ambition is to contribute to the development of rigorous, real-world **mathematical models of physical systems**, bridging theory and application in meaningful ways.
-
-## Vision
-
-I believe that robust mathematical thinking is a superpower in today’s world — and I’m working toward becoming a **pioneer in data-driven decision-making** for energy and industrial systems. My goal is to lead impactful, intelligent solutions in one of the most critical sectors for global development.
+Professionally, I’ve worked across engineering, planning, and strategic roles within the gas sector, where I’ve been responsible for integrating technical expertise with long-term energy outlooks. My work spans everything from optimizing infrastructure and production systems to contributing to national energy strategies and forecasting models. In these roles, I’ve often served as a bridge between operational realities and forward-looking planning, translating complex technical data into actionable insights that inform investment decisions, policy alignment, and future planning. This blend of hands-on problem-solving and high-level strategy has shaped my ability to think both analytically and systemically, especially in industries where precision and foresight are critical.
 
 ## Professional History
 
@@ -33,17 +28,13 @@ I believe that robust mathematical thinking is a superpower in today’s world �
 - Senior Production Planning Engineer – ADNOC Gas (2022-2024)
 - Process Engineer – ADNOC Refining (2019-2021)
 
-## Academic Journey
 
-While working full-time in a demanding technical and strategic role, I pursued my Master’s in Mathematics — and later began a second Master’s in Machine Learning. Despite the load of being a Full-Time student and Full-time Employee, I maintained strong academic performance while receiving promotions and high evaluations at work. That period tested and shaped my discipline, mental resilience, and passion for growth.
+## My  Journey
 
-It was during this time that I realized my ability to thrive at the intersection of theory and application — and it continues to fuel my vision for impactful, cross-disciplinary work.
-
-
-## Personal Notes
-
-I’ve always loved helping others learn — whether as an older sibling, classroom tutor, or mentor — and I enjoy breaking down complex ideas into simple, digestible insights.
-
-My love for adventure and challenge extends beyond the academic realm. I’m into fitness and pursue my physical goals with the same discipline I apply to my intellectual ones. I primarily focus on bodybuilding, but I also enjoy long-distance running (even if I barely survive marathons) and challenging hikes that push my limits.
-
-There’s something deeply fulfilling about navigating both mind and body through effort and discomfort — and coming out stronger on the other side.
+Managing a demanding full-time job while pursuing a rigorous technical degree was one of the most challenging periods of my life. I was juggling two full-time commitments, each requiring the full extent of my focus and mental energy. My Master’s in Mathematics was costly in every sense of the word; financially, emotionally, and intellectually. It demanded long hours, significant sacrifice, and often left me drained. To make matters more difficult, I had no clear plan for what would come after. I was investing everything I had without knowing where it might lead.
+But what fueled me and pushed me forward was not the idea of a promising career, nor the prestige of the degree. Although both are valid reasons, they wouldn’t have withstood the amount of stress and cost I had to go through, especially since my current career path was very promising in both regards. What pushed me was something more pure and cliché: it was my curiosity and thirst for knowledge. Each new topic and subject I learned was astonishing and mind-blowing. Studying and learning some of the topics felt like an escape from the steady, unspectacular everyday life to the fantastical world of the mind, from the day-to-day job in the corporate real world to the imaginary world of concepts and ideas, learning offered me a rare sense of wonder. It never felt like a strategic move for my career. It felt like an indulgent, expensive hobby that the child in me never wanted to let go of. 
+Thus, I decided after graduating to let go of my childlike dreams of learning mathematics to my heart’s content and return to reality, to climb the corporate ladder. But fate had other plans.
+My best friend convinced me to apply for a PhD in Machine Learning, claiming that it would have everything I wanted in a degree and that my background made me more than suited for research in this new, exploding field. But I was sure it wasn’t for me. And although I love math, I didn’t want to spend my life immersed in abstractions and theories that might never find practical use. It was more of a fun hobby for me, and it was time to focus on building my career and being a contributing more tangibly to the world around me.
+ But he was very insistent, and I couldn’t shake the feeling of curiosity. I hesitantly settled for finishing a Master’s in Machine Learning in my free-time, thinking it would be another side gig. And so, once again, I found myself balancing two full-time commitments, a familiar terrain. But I already knew how to navigate challenges like this, so I wasn’t fazed.
+Although Machine Learning is a fascinating field of technology especially nowadays after the explosion of AI in popular culture, what entranced me was it’s mathematical foundation. Seeing the application of concepts I once thought of as purely philosophical or abstract. The degree re-ignited what I thought I let go, my love for mathematics. While most of my classmates were focused on the skill of applying ML to real-world scenarios (a very valuable skill), I spent my time trying to understand the underlying mathematics: the logic, the structure, the beauty. I started reading papers on topics that interested me, and each time I could feel the passion pulsing through me. Slowly, it became clear what I needed to do next, a major decision that I’m preparing for carefully, by building the right foundation first.
+I will hopefully continue to research applied mathematics for my PhD. I’m very thankful for my current degree, as it showed me the power and utility that mathematics holds in the right hands. I understand that nothing in life is guaranteed, and things might not turn out the way I want them to, sacrifices may be required, but if this is not a calling, I don’t know what is. So I’ve made myself a promise, I’ll pursue this goal with everything I have. I’ll do the work, take the risks, and explore every opportunity I can until I get there.
