@@ -20,7 +20,8 @@ My academic and professional interests lie at the intersection of:
 
 
 
-Professionally, I’ve worked across engineering, planning, and strategic roles within the gas sector, where I’ve been responsible for integrating technical expertise with long-term energy outlooks. My work spans everything from optimizing infrastructure and production systems to contributing to national energy strategies and forecasting models. In these roles, I’ve often served as a bridge between operational realities and forward-looking planning, translating complex technical data into actionable insights that inform investment decisions, policy alignment, and future planning. This blend of hands-on problem-solving and high-level strategy has shaped my ability to think both analytically and systemically, especially in industries where precision and foresight are critical.
+Professionally, I’ve worked across engineering, planning, and strategic roles within the gas sector, where I’ve been responsible for integrating technical expertise with long-term energy outlooks. My work spans everything from optimizing infrastructure and production systems to contributing to national energy strategies and forecasting models. 
+In these roles, I’ve often found myself at the intersection of operations, data, and strategy — acting as a bridge between day-to-day technical work and long-term planning. I’ve worked on translating complex technical details into clear, actionable insights that support investment decisions, guide strategic planning, and align with broader policy goals. 
 
 ## Professional History
 
