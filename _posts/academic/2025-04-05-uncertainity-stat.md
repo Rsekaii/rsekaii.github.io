@@ -1,7 +1,7 @@
 ---
 layout: post
 title: " Uncertainty and Some Foundations of Statistical Inference"
-date: 2025-04-05
+date: 2025-03-05
 math: true
 ---
 
