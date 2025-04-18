@@ -78,14 +78,15 @@ Conformal prediction is **model-agnostic** and **distribution-free**.
 
 However, success depends on:
 
-- A well-chosen **score function**
-- The assumption that data is **exchangeable**
+- A well-chosen score function
+- The assumption that data is exchangeable
 --
 ### What is Exchangeability?
 
 In probability, a sequence of random variables is **exchangeable** if the joint distribution does not change when the order of the variables is shuffled.
 
 Formally:
+
 $$
 P(X_1, X_2, \dots, X_n) = P(X_{\pi(1)}, X_{\pi(2)}, \dots, X_{\pi(n)})
 $$
