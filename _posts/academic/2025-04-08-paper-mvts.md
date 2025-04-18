@@ -2,7 +2,7 @@
 title: " Paper Review - Simple Baseline ofr MultiV. T.S. Forecasting"
 subtitle: "A Simple Baseline for Multivariate Time-Series Forecasting"
 author: Rames AlJneibi
-date: 2024-04-16
+date: 2024-10-16
 layout: post
 math: true
 ---
