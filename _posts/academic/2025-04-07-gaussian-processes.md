@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Gaussian Processes - From Concept to Implementation"
-date: 2025-04-07
+date: 2025-02-07
 math: true
 ---
 
