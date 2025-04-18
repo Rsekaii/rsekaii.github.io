@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Causal Effects of Monetary Policy on Unemployment: A Structural Approach"
-date: 2025-04-08
+date: 2025-03-18
 math: true
 ---
 
@@ -61,9 +61,9 @@ The key question:
 What is the effect on **Unemployment** when the **Central Bank** changes interest rates?
 
 Formally:
-\[
+$$
 P(\text{Unemployment\%} \mid do(\text{Fed Fund Rate}))
-\]
+$$
 
 After applying **do-calculus**, the corresponding DAG is:
 
@@ -77,14 +77,14 @@ This isolates the intervention on interest rates from their usual causes (i.e., 
 
 Using the adjusted DAG and applying rules of **do-calculus**, I arrived at:
 
-\[
+$$
 P(\text{Unemployment\%} \mid do(\text{Fed Fund Rate})) =
 \sum_{\text{Inflation}, \text{M2}, \text{GDP}}
 P(\text{Unemployment\%} \mid \text{M2})
 P(\text{M2} \mid \text{GDP}, \text{Inflation})
 P(\text{GDP} \mid \text{Fed Fund Rate})
 P(\text{Inflation} \mid \text{M2})
-\]
+$$
 
 Key reasoning:
 - Conditioning M2 on GDP adjusts for confounders.
@@ -96,9 +96,9 @@ Key reasoning:
 ## Next Steps
 
 I plan to estimate these conditional distributions using **Kernel Density Estimation (KDE)** to simulate:
-\[
+$$
 P(\text{Unemployment\%} \mid do(\text{Fed Fund Rate}))
-\]
+$$
 
 This will help visualize the shift in unemployment distribution resulting from monetary policy intervention.
 
