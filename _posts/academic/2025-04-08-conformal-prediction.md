@@ -43,9 +43,9 @@ The pipeline helped make the method intuitive:
 2. **Score Function**  
    A nonconformity score function is used to quantify how far a predicted value is from the true value. A well-designed score function gives:
 
-   \[
+   $$
    s(\hat{y}, y)
-   \]
+   $$
 
    Higher scores → more uncertainty. Lower scores → greater conformity.
 
@@ -54,9 +54,9 @@ The pipeline helped make the method intuitive:
 3. **Calibration Scores and Quantile Threshold**  
    Using a **calibration set**, we compute scores and determine the quantile threshold:
 
-   \[
+   $$
    \hat{q} = \frac{(n+1)(1-\alpha)}{n}
-   \]
+   $$
 
    For instance, \( \alpha = 0.05 \) gives a 95% confidence level.  
    Now \( \hat{q} \) is the threshold such that ~95% of calibration scores fall below it.
@@ -64,9 +64,9 @@ The pipeline helped make the method intuitive:
 4. **Prediction Set**  
    Given a test point, we define the prediction set as:
 
-   \[
+   $$
    C(X_{\text{test}}) = \{ y \mid s(\hat{y}_{\text{test}}, y) \leq \hat{q} \}
-   \]
+   $$
 
    This means: with 95% confidence, the true \( y \) is in this prediction set.
 
@@ -86,10 +86,10 @@ However, success depends on:
 In probability, a sequence of random variables is **exchangeable** if the joint distribution does not change when the order of the variables is shuffled.
 
 Formally:
-\[
+$$
 P(X_1, X_2, \dots, X_n) = P(X_{\pi(1)}, X_{\pi(2)}, \dots, X_{\pi(n)})
-\]
-for any permutation \( \pi \) of indices.
+$$
+for any permutation $ \pi $ of indices.
 
 This is **weaker than the i.i.d. assumption** — all i.i.d. sequences are exchangeable, but not all exchangeable sequences are i.i.d.
 
@@ -110,18 +110,18 @@ One practical application shared by the authors involves detecting gut polyps fr
 - A **target TPR (True Positive Rate)** of \( 1 - \alpha \) is set.
 - FNR is defined as:
 
-\[
+$$
 \text{FNR} = 1 - \frac{\sum (\text{Predicted Mask} \cap \text{Ground Truth Mask})}{\sum (\text{Ground Truth Mask})}
-\]
+$$
 
 - Softmax scores are used as uncertainty scores.
 - A threshold \( \lambda_{\text{hat}} \) is computed using **Brent’s method**:
 
-\[
+$$
 \text{FNR}(\lambda) - \left(\frac{n+1}{n} \alpha - \frac{1}{n}\right) = 0
-\]
+$$
 
-- Applying \( \lambda_{\text{hat}} \) yields segmentation masks that satisfy the desired confidence level.
+- Applying $ \lambda_{\text{hat}} $ yields segmentation masks that satisfy the desired confidence level.
 
 ---
 
