@@ -27,13 +27,13 @@ Epistemic uncertainty is **reducible**: it arises from data/model limitations an
 
 ### Formal Definitions
 
-Let \( x \in X \) be inputs and \( y \in Y \) outputs.
+Let $ x \in X $ be inputs and $ y \in Y $ outputs.
 
 #### Aleatoric Uncertainty:
 
-\[
+$$
 Y \mid x \sim f_{Y|x}(y \mid x)
-\]
+$$
 
 #### Epistemic Uncertainty:
 
@@ -41,9 +41,9 @@ Defined as the remaining uncertainty not captured by aleatoric uncertainty. It c
 
 #### Total Uncertainty:
 
-\[
+$$
 \text{Total Uncertainty} = \text{Aleatoric Uncertainty} + \text{Epistemic Uncertainty}
-\]
+$$
 
 ##  Statistical Knowledge  
 *Statistical & Probabilistic Inference in ML*
@@ -52,14 +52,14 @@ Defined as the remaining uncertainty not captured by aleatoric uncertainty. It c
 
 Measures the "distance" between two distributions \( P \) (true) and \( Q \) (approximation):
 
-\[
+$$
 \text{KL}(P \parallel Q) = \sum P(x) \log \frac{P(x)}{Q(x)} \quad \text{(discrete)}
-\]
-\[
+$$
+$$
 \text{KL}(P \parallel Q) = \int P(x) \log \frac{P(x)}{Q(x)} dx \quad \text{(continuous)}
-\]
+$$
 
-> KL divergence is **not symmetric**, and equals zero only when \( P = Q \).
+> KL divergence is **not symmetric**, and equals zero only when $ P = Q $.
 
 ---
 
@@ -71,31 +71,31 @@ Quantifies how much information a sample provides about a parameter.
 
 1. **Variance of the Score Function**:
 
-\[
+$$
 I(\theta) = \mathbb{E} \left[ S(\theta) S(\theta)^T \right]
 \quad \text{where } S(\theta) = \frac{\partial}{\partial \theta} \log p(X | \theta)
-\]
+$$
 
 2. **Negative Expectation of the Hessian**:
 
-\[
+$$
 I(\theta) = -\mathbb{E} \left[ \frac{\partial^2}{\partial \theta \partial \theta^T} \log p(X | \theta) \right]
-\]
+$$
 
 ---
 
 #### Interpretation:
 
-- **High Fisher Info** → Low uncertainty in \( \hat{\theta} \)
+- **High Fisher Info** → Low uncertainty in $ \hat{\theta} $
 - **Low Fisher Info** → High uncertainty
 
 ---
 
 ### Cramér-Rao Lower Bound:
 
-\[
+$$
 \text{Var}(\hat{\theta}) \geq I(\theta)^{-1}
-\]
+$$
 
 The inverse of Fisher Information provides a lower bound on the variance of any unbiased estimator.
 
