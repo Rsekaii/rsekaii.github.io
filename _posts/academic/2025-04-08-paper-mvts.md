@@ -27,8 +27,9 @@ The Stationary Wavelet Transform (SWT) offers an ideal representation for time-s
 
 **Geometric Product**:  
 $$
-QK = Q \cdot K + Q \wedge K
+QK = Q \cdot K + (Q \wedge K)
 $$
+
 
 Conventional self-attention relies on the dot product to capture relationships between the \( Q \) and \( K \) matrices. The paper enhances self-attention by introducing the **geometric product**, which complements the dot product with the **wedge product**. This addition captures linear independencies and the orientation of the spanned space. The outputs of both products are summed after matching their dimensions, creating a more robust attention mechanism.
 
