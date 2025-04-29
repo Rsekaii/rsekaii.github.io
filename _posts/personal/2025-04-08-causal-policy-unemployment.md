@@ -27,9 +27,10 @@ For this analysis, I used data from the [Federal Reserve Economic Data (FRED)](h
 
 To visualize assumed relationships between these variables, I started with a basic DAG inspired by standard macroeconomic models:
 
-<div style="text-align:center;">
+<div style="display: flex; justify-content: center;">
   <img src="{{ '/images/DAG_cfa.png' | relative_url }}" alt="Causal DAG" width="600px">
 </div>
+
 ---
 
 ## Data Preprocessing
@@ -38,20 +39,17 @@ Since most variables are monthly except GDP (which is quarterly), I interpolated
 
 Exploratory time-series plots revealed correlations and suggested directions for further causal analysis:
 
-
-<div style="text-align:center;">
-  <img src="{{ '/images/ts1.png' | relative_url }}" alt="Time Series Plot 1" width="600px">
-</div>
-
-<div style="text-align:center;">
-  <img src="{{ '/images/ts2.png' | relative_url }}" alt="Time Series Plot 2" width="600px">
+<div style="display: flex; gap: 1rem;">
+  <img src="{{ '/images/ts1.png' | relative_url }}" alt="Time Series Plot 1" width="48%">
+  <img src="{{ '/images/ts2.png' | relative_url }}" alt="Time Series Plot 2" width="48%">
 </div>
 
 To prepare the data for time-series modeling, we applied first-order differencing to ensure stationarity. This was verified using the Augmented Dickey-Fuller (ADF) test. This step was crucial to avoid spurious results in downstream Granger causality and VAR models.
 
-<div style="text-align:center;">
+<div style="display: flex; justify-content: center;">
   <img src="{{ '/images/ts3.png' | relative_url }}" alt="Transformed Time Series Plot" width="600px">
 </div>
+
 ---
 
 ## Granger Causality and DAG Adjustment
@@ -64,7 +62,7 @@ To uncover temporal causality, I ran **Granger Causality** tests between variabl
 
 These empirical results contradicted some textbook claims, prompting me to revise the initial DAG structure to better reflect observed temporal dependencies:
 
-<div style="text-align:center;">
+<div style="display: flex; justify-content: center;">
   <img src="{{ '/images/DAG_new.png' | relative_url }}" alt="Updated DAG" width="600px">
 </div>
 
@@ -82,11 +80,9 @@ $$
 
 After applying **do-calculus**, the corresponding DAG is:
 
-<div style="text-align:center;">
+<div style="display: flex; justify-content: center;">
   <img src="{{ '/images/DAG_dofed.png' | relative_url }}" alt="DAG with do(FedFunds)" width="600px">
 </div>
-
-This isolates the intervention on interest rates from their usual causes (i.e., cutting all incoming arrows to FEDFUNDS).
 
 ---
 
@@ -116,29 +112,24 @@ However, instead of analytically estimating these conditional distributions, I o
 
 We estimated the full joint distribution over the variables using **Kernel Density Estimation (KDE)**, then simulated the effect of different interventions on the Federal Funds Rate.
 
-<div style="text-align:center;">
-  <img src="{{ '/images/kde1.png' | relative_url }}" alt="KDE Plots 1-1" width="600px">
-</div>
-
-<div style="text-align:center;">
-  <img src="{{ '/images/kde2.png' | relative_url }}" alt="KDE 3D+color " width="600px">
+<div style="display: flex; gap: 1rem;">
+  <img src="{{ '/images/kde1.png' | relative_url }}" alt="KDE Plot 1-1" width="48%">
+  <img src="{{ '/images/kde2.png' | relative_url }}" alt="KDE 3D Color Plot" width="48%">
 </div>
 
 Causal effect plots:
+
 - $$ \mathbb{E}[\text{Unemployment} \mid do(\text{FedFunds})] $$
-- 
-<div style="text-align:center;">
-  <img src="{{ '/images/cp1.png' | relative_url }}" alt="Causal Effect Plot 1: Unemployment" width="600px">
+
+<div style="display: flex; justify-content: center;">
+  <img src="{{ '/images/cp1.png' | relative_url }}" alt="Causal Effect Plot: Unemployment" width="600px">
 </div>
 
 - $$ \mathbb{E}[\text{GDP Growth} \mid do(\text{FedFunds})] $$
-<div style="text-align:center;">
-  <img src="{{ '/images/cp2.png' | relative_url }}" alt="Causal Effect Plot 2: GDP Growth" width="600px">
+
+<div style="display: flex; justify-content: center;">
+  <img src="{{ '/images/cp2.png' | relative_url }}" alt="Causal Effect Plot: GDP Growth" width="600px">
 </div>
-
-
-These showed monotonic inverse relationships, where increasing the central bank interest rate reduced both unemployment and GDP growth. The GDP result aligns with standard economic intuition, while the unemployment result is more surprising and may be explained by unmeasured confounders or model simplifications.
-
 
 ---
 
@@ -154,13 +145,11 @@ This experiment highlights a key lesson: predictive power \( \neq \) causal infl
 
 ## Final Thoughts
 
-In this project, I succesfuly :
+In this project, I successfully:
 - Modeled macroeconomic indicators using VAR and KDE
 - Transformed data to satisfy stationarity assumptions
 - Tested economic theory using Granger causality and DAGs
 - Simulated interventional distributions using do-calculus
-
-
 
 This end-to-end pipeline demonstrates the power of combining causal reasoning, time-series modeling, and machine learning. It provides a fresh, structured way to analyze classic economic questions through a modern lens.
 
