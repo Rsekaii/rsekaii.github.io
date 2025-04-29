@@ -27,7 +27,7 @@ For this analysis, I used data from the [Federal Reserve Economic Data (FRED)](h
 
 To visualize assumed relationships between these variables, I started with a basic DAG inspired by standard macroeconomic models:
 
-![Causal DAG](/images/DAG cfa.png){: width="600px" }
+![Causal DAG]({{ "/images/dag_cfa.png" | relative_url }})
 
 ---
 
@@ -37,12 +37,15 @@ Since most variables are monthly except GDP (which is quarterly), I interpolated
 
 Exploratory time-series plots revealed correlations and suggested directions for further causal analysis:
 
-![Time Series Plot 1](/images/ts1.png){: width="600px" }  
-![Time Series Plot 2](/images/ts2.png){: width="600px" }
+
+![Time Series Plot 1]({{ "/images/ts1.png" | relative_url }})
+
+![Time Series Plot 2]({{ "/images/ts2.png" | relative_url }})
+
 
 To prepare the data for time-series modeling, we applied first-order differencing to ensure stationarity. This was verified using the Augmented Dickey-Fuller (ADF) test. This step was crucial to avoid spurious results in downstream Granger causality and VAR models.
 
-![Time Series Plot_transformed](/images/ts3.png){: width="600px" }
+![Time Series Plot Transformed]({{ "/images/ts3.png" | relative_url }})
 ---
 
 ## Granger Causality and DAG Adjustment
@@ -55,7 +58,7 @@ To uncover temporal causality, I ran **Granger Causality** tests between variabl
 
 These empirical results contradicted some textbook claims, prompting me to revise the initial DAG structure to better reflect observed temporal dependencies:
 
-![Updated DAG](/images/DAG new.png){: width="600px" }
+![Updated DAG]({{ "/images/DAG_new.png" | relative_url }})
 
 ---
 
@@ -71,7 +74,8 @@ $$
 
 After applying **do-calculus**, the corresponding DAG is:
 
-![do-FED DAG](/images/DAG dofed.png){: width="600px" }
+![d-FED DAG]({{ "/images/DAG_dofed.png" | relative_url }})
+
 
 This isolates the intervention on interest rates from their usual causes (i.e., cutting all incoming arrows to FEDFUNDS).
 
@@ -103,19 +107,18 @@ However, instead of analytically estimating these conditional distributions, I o
 
 We estimated the full joint distribution over the variables using **Kernel Density Estimation (KDE)**, then simulated the effect of different interventions on the Federal Funds Rate.
 
-![KDE Plot 1](/images/kde1.png){: width="600px" }
+![KDE 1-1 plots]({{ "/images/kde1.png" | relative_url }})
 
-![KDE Plot 2](/images/kde2.png){: width="600px" }
 
+![KDE 3D plot + 1D Color]({{ "/images/kde2.png" | relative_url }})
 
 Causal effect plots:
 - $$ \mathbb{E}[\text{Unemployment} \mid do(\text{FedFunds})] $$
-- 
-  ![Causal effect Plot 1](/images/cp1.png){: width="600px" }  
+![Causal effect Plot 1]({{ "/images/cp1.png" | relative_url }})
+
 
 - $$ \mathbb{E}[\text{GDP Growth} \mid do(\text{FedFunds})] $$
-- 
-- ![Causal effect Plot 2](/images/cp2.png){: width="600px" }
+![Causal effect Plot 2]({{ "/images/cp2.png" | relative_url }})
 
 
 
