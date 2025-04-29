@@ -27,7 +27,7 @@ For this analysis, I used data from the [Federal Reserve Economic Data (FRED)](h
 
 To visualize assumed relationships between these variables, I started with a basic DAG inspired by standard macroeconomic models:
 
-![Causal DAG]({{ "/images/dag_cfa.png" | relative_url }})
+![Causal DAG]({{ "/images/DAG_cfa.png" | relative_url }})
 
 ---
 
