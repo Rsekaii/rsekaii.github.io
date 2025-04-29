@@ -132,13 +132,13 @@ This experiment highlights a key lesson: predictive power \( \neq \) causal infl
 
 ## Final Thoughts
 
-In this project, we:
+In this project, I succesfuly :
 - Modeled macroeconomic indicators using VAR and KDE
 - Transformed data to satisfy stationarity assumptions
 - Tested economic theory using Granger causality and DAGs
 - Simulated interventional distributions using do-calculus
 
-We started by drawing a DAG based on standard CFA curriculum theory, but upon testing, many proposed links did not hold statistically. This led us to revise the DAG based on empirical dependencies and causal principles.
+
 
 This end-to-end pipeline demonstrates the power of combining causal reasoning, time-series modeling, and machine learning. It provides a fresh, structured way to analyze classic economic questions through a modern lens.
 
