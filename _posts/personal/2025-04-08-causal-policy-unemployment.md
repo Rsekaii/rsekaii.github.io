@@ -90,6 +90,16 @@ After applying **do-calculus**, the corresponding DAG is:
 
 Using the adjusted DAG and applying rules of **do-calculus**, I arrived at:
 
+$$
+\begin{aligned}
+P(\text{Unemployment\%} \mid do(\text{Fed Fund Rate})) = \; & 
+\sum_{\text{Inflation}, \text{M2}, \text{GDP}} \\
+& P(\text{Unemployment\%} \mid \text{M2}) \\
+& \cdot P(\text{M2} \mid \text{GDP}, \text{Inflation}) \\
+& \cdot P(\text{GDP} \mid \text{Fed Fund Rate}) \\
+& \cdot P(\text{Inflation} \mid \text{M2})
+\end{aligned}
+$$
 
 
 Key reasoning:
