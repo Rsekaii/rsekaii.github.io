@@ -90,14 +90,7 @@ After applying **do-calculus**, the corresponding DAG is:
 
 Using the adjusted DAG and applying rules of **do-calculus**, I arrived at:
 
-$$
-P(\text{Unemployment\%} \mid do(\text{Fed Fund Rate})) =
-\sum_{\text{Inflation}, \text{M2}, \text{GDP}}
-P(\text{Unemployment\%} \mid \text{M2})
-P(\text{M2} \mid \text{GDP}, \text{Inflation})
-P(\text{GDP} \mid \text{Fed Fund Rate})
-P(\text{Inflation} \mid \text{M2})
-$$
+
 
 Key reasoning:
 - Conditioning M2 on GDP adjusts for confounders.
