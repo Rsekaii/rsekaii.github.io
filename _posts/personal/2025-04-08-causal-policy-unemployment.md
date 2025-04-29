@@ -142,3 +142,4 @@ We started by drawing a DAG based on standard CFA curriculum theory, but upon te
 
 This end-to-end pipeline demonstrates the power of combining causal reasoning, time-series modeling, and machine learning. It provides a fresh, structured way to analyze classic economic questions through a modern lens.
 
+[View the full code on GitHub](https://github.com/Rsekaii/CausalCFA)
