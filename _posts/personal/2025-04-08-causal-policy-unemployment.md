@@ -7,10 +7,11 @@ math: true
 
 ## Introduction
 
-As someone currently preparing for the **CFA exams**, I’ve been diving deeper into how macroeconomic policy impacts inflation, employment, and GDP. The curriculum often presents these causal relationships as established fact — but I became curious: **can we test these causal claims statistically?**
+As someone currently preparing for the CFA exams, I’ve been diving deeper into how macroeconomic policy impacts inflation, employment, and GDP. The curriculum often presents these causal relationships as established fact — but I became curious: **can we test these causal claims statistically?**
 
-This project is a personal attempt to bridge what I’m learning in economics from my CFA preparations using the tools of **causal inference** I learned in the Masters in Machine Learning.
-In particular, I wanted to see whether Central Bank interest rate changes truly affect unemployment, and how we can model that effect using real-world data and tools like **do-calculus**.
+This project is a personal attempt to bridge what I’m learning in economics from my CFA preparations with the tools of **causal inference** I learned in my Master’s in Machine Learning.
+
+In particular, I wanted to see whether central bank interest rate changes truly affect unemployment, and how we can model that effect using real-world data and tools like **do-calculus**.
 
 ---
 
@@ -39,17 +40,20 @@ Exploratory time-series plots revealed correlations and suggested directions for
 ![Time Series Plot 1](/images/ts1.png)  
 ![Time Series Plot 2](/images/ts2.png)
 
+To prepare the data for time-series modeling, we applied first-order differencing to ensure stationarity. This was verified using the Augmented Dickey-Fuller (ADF) test. This step was crucial to avoid spurious results in downstream Granger causality and VAR models.
+
+![Time Series Plot_transformed](/images/ts3.png)
 ---
 
 ## Granger Causality and DAG Adjustment
 
-To uncover temporal causality, I ran **Granger Causality** tests between variables. For instance:
+To uncover temporal causality, I ran **Granger Causality** tests between variables. Some findings:
 
-- GDP lag of ~3–5 months
-- FEDFUNDS and M2 consistently Granger-caused inflation and GDP
-- Bidirectional relationships between GDP and unemployment
+- The Federal Funds Rate Granger-causes both GDP and Inflation.
+- GDP Granger-causes M2 and Unemployment at some lags.
+- Unemployment Granger-causes Inflation at longer lags.
 
-Based on these results, I updated the DAG:
+These empirical results contradicted some textbook claims, prompting me to revise the initial DAG structure to better reflect observed temporal dependencies:
 
 ![Updated DAG](/images/DAG new.png)
 
@@ -91,15 +95,50 @@ Key reasoning:
 - Summing over GDP, Inflation, and M2 marginalizes confounding paths.
 - The structure respects endogenous roles of variables like M2 and Inflation.
 
----
-
-## Next Steps
-
-I plan to estimate these conditional distributions using **Kernel Density Estimation (KDE)** to simulate:
-$$
-P(\text{Unemployment\%} \mid do(\text{Fed Fund Rate}))
-$$
-
-This will help visualize the shift in unemployment distribution resulting from monetary policy intervention.
+However, instead of analytically estimating these conditional distributions, I opted for a more flexible and non-parametric approach.
 
 ---
+
+## KDE Estimation and Causal Simulation
+
+We estimated the full joint distribution over the variables using **Kernel Density Estimation (KDE)**, then simulated the effect of different interventions on the Federal Funds Rate.
+
+![KDE Plot 1](/images/kde1.png)  
+![KDE Plot 2](/images/kde2.png)
+
+Causal effect plots:
+- $$ \mathbb{E}[\text{Unemployment} \mid do(\text{FedFunds})] $$
+  ![Causal effect Plot 1](/images/cp1.png)  
+
+- $$ \mathbb{E}[\text{GDP Growth} \mid do(\text{FedFunds})] $$
+- ![Causal effect Plot 2](/images/cp2.png)
+
+
+
+These showed monotonic inverse relationships, where increasing the central bank interest rate reduced both unemployment and GDP growth. The GDP result aligns with standard economic intuition, while the unemployment result is more surprising and may be explained by unmeasured confounders or model simplifications.
+
+
+---
+
+## Extra: Reflecting on the Predictive vs Causal Gap
+
+To contrast this causal approach with older data science techniques I previously used, I ran **Recursive Feature Elimination (RFE)** with linear regression to predict unemployment. This method iteratively removes features to find the optimal subset that best predicts the outcome — something I would have once naively interpreted as causal.
+
+Interestingly, **Inflation** and **M2 Money Supply** emerged as the best predictors of Unemployment. However, as shown through the causal analysis above, **neither has a direct causal effect** on Unemployment. M2 acts as a mediator for the Federal Funds Rate, and Inflation may even act as a collider or proxy in certain paths — invalidating causal inference if conditioned on.
+
+This experiment highlights a key lesson: predictive power \( \neq \) causal influence. Variables that are easiest to observe or strongly correlated might still be poor intervention targets. Causal inference provides a fundamentally different lens — one focused not on "what correlates," but on "what drives change."
+
+---
+
+## Final Thoughts
+
+In this project, we:
+- Modeled macroeconomic indicators using VAR and KDE
+- Transformed data to satisfy stationarity assumptions
+- Tested economic theory using Granger causality and DAGs
+- Simulated interventional distributions using do-calculus
+
+We started by drawing a DAG based on standard CFA curriculum theory, but upon testing, many proposed links did not hold statistically. This led us to revise the DAG based on empirical dependencies and causal principles.
+
+This end-to-end pipeline demonstrates the power of combining causal reasoning, time-series modeling, and machine learning. It provides a fresh, structured way to analyze classic economic questions through a modern lens.
+
