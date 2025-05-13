@@ -94,7 +94,7 @@ note: There exist multiple methods for constructing such h (and F), but in this 
     $$
     a + b = b + a
     $$
-  > Every field under addition forms an abelian group.
+  > Real Numbers under addition ($\mathbb{R}$, + ) forms an abelian group.
 
 ---
 
@@ -114,13 +114,12 @@ note: There exist multiple methods for constructing such h (and F), but in this 
     $$
     a \cdot b = b \cdot a
     $$
-  > All fields are commutative rings, but not all commutative rings are fields.
 
 ---
 
 - **Field**
   - A commutative ring $F$ where:
-    - $1 \neq 0$
+    - $1 \neq 0$ , (Mupltiplicative identity $\neq $ Additive Identity)
     - Every nonzero element has a multiplicative inverse:
       $$
       \forall a \in F \setminus \{0\}, \quad \exists a^{-1} \in F \text{ such that } a \cdot a^{-1} = 1
