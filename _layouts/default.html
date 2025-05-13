@@ -36,7 +36,20 @@
               {% endif %}
             {% endfor %}
           </ul>
-
+          
+          <h3 style="margin-bottom: 10px; margin-top: 30px;">Elegant Encounters</h3>
+          <p style="margin-top: 0; font-size: 0.85em; color: #555;">
+            Records of Where I Found Beautiful Math in Unexpected Places
+          </p>
+          <ul class="post-list" style="list-style: none; padding-left: 0;">
+            {% assign personal_posts = site.posts | where_exp: "post", "post.path contains '/math/'" %}
+            {% for post in math_posts %}
+              <li style="margin-bottom: 10px;">
+                <a href="{{ post.url }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+          
           <h3 style="margin-bottom: 10px;">Academic Pursuit</h3>
           <p style="margin-top: 0; font-size: 0.85em; color: #555;">
             Posts exploring theoretical and technical topics from my academic pursuit.
