@@ -80,7 +80,7 @@ Now, let's shift our focus to constructing such p-difference-universal $h$.
 
 > at the end of the post, I will provide a list of nested algebraic structures from Abstract Algebra, which form the foundation needed to reach the structure used in our construction.
 
-- **Finite Field**  $\mathbb{F}_p$
+### **Finite Field**  $\mathbb{F}_p$
   - A field with finitely many elements 
     - Exists **only when** the number of elements is a power of a prime:
       $$
@@ -89,7 +89,7 @@ Now, let's shift our focus to constructing such p-difference-universal $h$.
       where $p$ is a prime and $n \geq 1$
 
 
-#### Theorem: Roots of Polynomials over a Field
+### Theorem: Roots of Polynomials over a Field
 
 Let $f(x)$ be a non-zero polynomial of degree $d$ over a field $\mathbb{F}$ (coefficient of $f(x)$ come from $\mathbb{F}$) Then:
 
@@ -106,6 +106,7 @@ $$
 We now shall construct the function we want using the properties of a Finite Field
 
 ---
+## Representing Variable in $F$
 
 Let $F$ be a finite field, and fix a point $k \in F$. Represent each message $m$ as a polynomial over $F$ (i.e., its coefficients are elements of $F$). 
 Define the function:
@@ -115,7 +116,7 @@ $$
 That is, evaluate the message polynomial at the point $k$.
 
 Precise definitions :
-### Polynomial Encoding of Messages
+#### Polynomial Encoding of Messages
 
 Fix a constant $\ell$, and define the message space as:
 $$
@@ -131,7 +132,7 @@ m(X) = m_1 X^{\ell'} + m_2 X^{\ell'-1} + \cdots + m_{\ell'} X
 $$
 (So we have a degree-$\ell'$ polynomial that fully represents the message and its length)
 
-### Keyed Function
+#### Constructing a Difference-Universal Keyed Function
 
 Define the keyed function h:
 $$
@@ -146,7 +147,7 @@ $$
 
 ---
 
-## Constructing a Difference-Universal Function
+## Proof that $ h_k $ above is $\frac{\ell}{|\mathbb{F}|}$ -difference-universal.
 
 Let $m_1 \ne m_2$ be two distinct messages in the set $\mathcal{M} = \mathbb{F}^{<\ell}$, and let $d \in \mathbb{F}$.
 
@@ -292,8 +293,6 @@ That is, the outputs for any two inputs are uniformly and independently distribu
   > **Examples**: $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{F}_p$
 
 ## Finite Fields $\mathbb{F}_p$ 
-
-> at the end of the post, I will provide a list of nested algebraic structures from Abstract Algebra, which form the foundation needed to reach the structure used in our construction.
 
 - **Finite Field**  $\mathbb{F}_p$
   - A field with finitely many elements
