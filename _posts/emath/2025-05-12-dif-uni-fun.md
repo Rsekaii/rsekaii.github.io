@@ -71,75 +71,27 @@ s = h_{k_h}(m) + F_{k_F}(r)
 $$
 
 Let $h$ be an p-difference-universal function, and $F$ be a pseudorandom function then it can be proven that the above is a strongly secure MAC scheme.
-Now, let's shift our focus to constructing such p-difference-universal $h$.
-note: There exist multiple methods for constructing such h (and F), but in this post I will shed light to a very elegant method. it uses concepts from a pure math topic, namely Abstract Algebra. first lets define the core structures that will be used in our formulation. The choice is not based on security measures, only on beauty. 
+Now, let's shift our focus to constructing such p-difference-universal $h$.  
+
+> note: There exist multiple methods for constructing such h (and F), but in this post I will shed light to a very elegant method. it uses concepts from a pure math topic, namely Abstract Algebra. first lets define the core structures that will be used in our formulation. The choice is not based on security measures, only on beauty. 
 
 
-## Algebraic Structures
+## Finite Fields $\mathbb{F}_p$ 
 
-I will now briefly define the nested algebraic structures from Abstract Algebra, which form the foundation needed to reach the structure used in constructing $\mathbb{F}_p$.
+> at the end of the post, I will provide a list of nested algebraic structures from Abstract Algebra, which form the foundation needed to reach the structure used in our construction.
 
-- **Group**
-  - A set $G$ with a binary operation $\cdot$ satisfying:
-    - **Closure**: $a \cdot b \in G$
-    - **Associativity**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
-    - **Identity**: $\exists e \in G$ such that $a \cdot e = a$
-    - **Inverses**: $\forall a \in G$, $\exists a^{-1} \in G$ such that $a \cdot a^{-1} = e$
-  > **Examples**:
-  > - $(\mathbb{Z}, +)$ — identity: $0$, inverse: $-a$
-  > - $(\mathbb{R} \setminus \{0\}, \cdot)$ — identity: $1$, inverse: $\frac{1}{a}$
-
-
-- **Abelian Group**
-  - A group where the operation is commutative:
-    $$
-    a + b = b + a
-    $$
-  > Real Numbers under addition ($\mathbb{R}$, + ) forms an abelian group.
-
-
-- **Ring**
-  - A set $R$ equipped with two operations: addition $(+)$ and multiplication $(\cdot)$
-    - $(R, +)$ is an abelian group
-    - Multiplication is associative
-    - Distributive laws hold:
-      - $a \cdot (b + c) = a \cdot b + a \cdot c$
-      - $(a + b) \cdot c = a \cdot c + b \cdot c$
-  > **Example**: $(\mathbb{Z}, +, \cdot)$ is a ring (but not a field).
-
-
-- **Commutative Ring**
-  - A ring where multiplication is also commutative:
-    $$
-    a \cdot b = b \cdot a
-    $$
-
-
-- **Field**
-  - A commutative ring $F$ where:
-    - $1 \neq 0$ , (Mupltiplicative identity $\neq $ Additive Identity)
-    - Every nonzero element has a multiplicative inverse:
-      $$
-      \forall a \in F \setminus \{0\}, \quad \exists a^{-1} \in F \text{ such that } a \cdot a^{-1} = 1
-      $$
-    - Both $(F, +)$ and $(F \setminus \{0\}, \cdot)$ are abelian groups
-  > **Examples**: $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{F}_p$
-
-
-- **Finite Field**
-  - A field with finitely many elements
+- **Finite Field**  $\mathbb{F}_p$
+  - A field with finitely many elements 
     - Exists **only when** the number of elements is a power of a prime:
       $$
       |\mathbb{F}| = p^n
       $$
       where $p$ is a prime and $n \geq 1$
-  > **Common Notations**:  
-  > - $\mathbb{F}_p$ — prime field of $p$ elements  
-  > - $\mathrm{GF}(p^n)$ — Galois Field of size $p^n$
+
 
 #### Theorem: Roots of Polynomials over a Field
 
-Let $f(x)$ be a non-zero polynomial of degree $d$ over a field $\mathbb{F}$. Then:
+Let $f(x)$ be a non-zero polynomial of degree $d$ over a field $\mathbb{F}$ (coefficient of $f(x)$ come from $\mathbb{F}$) Then:
 
 $$
 \text{The number of distinct roots of } f(x) \text{ in } \mathbb{F} \leq d
@@ -151,7 +103,7 @@ $$
 f(x) \text{ has at most } d \text{ roots in } \mathbb{F}_p
 $$
 
-Now, that the groundwork is set. let's start designing the function we wanted.
+We now shall construct the function we want using the properties of a Finite Field
 
 ---
 
@@ -238,7 +190,7 @@ Thus, the function $h_k$ is $\frac{\ell}{|\mathbb{F}|}$ -difference-universal.
 
 ## Strong Universality: A Stronger Guarantee
 
-In addition to difference-universality, we can construct families of functions with even stronger guarantees — known as **strongly universal functions**.
+In addition to difference-universality, we can construct families of functions with even stronger guarantees known as **strongly universal functions**.
 
 
 ### Definition: Strongly Universal Function
@@ -286,5 +238,71 @@ $$
 That is, the outputs for any two inputs are uniformly and independently distributed over $\mathbb{F}_p$.  
 
 > Proof is straightforward: solve the system of two equations ($h_{a,b}(x) = y$ and $h_{a,b}(x') = y'$). There is only one $(a, b)$ satisfying both, and since $k$ is chosen uniformly over $\mathbb{F}_p^* \times \mathbb{F}_p$, we get the desired probability.
+
+
+---
+
+## Algebraic Structures 
+
+
+- **Group**
+  - A set $G$ with a binary operation $\cdot$ satisfying:
+    - **Closure**: $a \cdot b \in G$
+    - **Associativity**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
+    - **Identity**: $\exists e \in G$ such that $a \cdot e = a$
+    - **Inverses**: $\forall a \in G$, $\exists a^{-1} \in G$ such that $a \cdot a^{-1} = e$
+  > **Examples**:
+  > - $(\mathbb{Z}, +)$ — identity: $0$, inverse: $-a$
+  > - $(\mathbb{R} \setminus \{0\}, \cdot)$ — identity: $1$, inverse: $\frac{1}{a}$
+
+
+- **Abelian Group**
+  - A group where the operation is commutative:
+    $$
+    a + b = b + a
+    $$
+  > Real Numbers under addition ($\mathbb{R}$, + ) forms an abelian group.
+
+
+- **Ring**
+  - A set $R$ equipped with two operations: addition $(+)$ and multiplication $(\cdot)$
+    - $(R, +)$ is an abelian group
+    - Multiplication is associative
+    - Distributive laws hold:
+      - $a \cdot (b + c) = a \cdot b + a \cdot c$
+      - $(a + b) \cdot c = a \cdot c + b \cdot c$
+  > **Example**: $(\mathbb{Z}, +, \cdot)$ is a ring (but not a field).
+
+
+- **Commutative Ring**
+  - A ring where multiplication is also commutative:
+    $$
+    a \cdot b = b \cdot a
+    $$
+
+
+- **Field**
+  - A commutative ring $F$ where:
+    - $1 \neq 0$ , (Mupltiplicative identity $\neq $ Additive Identity)
+    - Every nonzero element has a multiplicative inverse:
+      $$
+      \forall a \in F \setminus \{0\}, \quad \exists a^{-1} \in F \text{ such that } a \cdot a^{-1} = 1
+      $$
+    - Both $(F, +)$ and $(F \setminus \{0\}, \cdot)$ are abelian groups
+  > **Examples**: $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{F}_p$
+
+## Finite Fields $\mathbb{F}_p$ 
+
+> at the end of the post, I will provide a list of nested algebraic structures from Abstract Algebra, which form the foundation needed to reach the structure used in our construction.
+
+- **Finite Field**  $\mathbb{F}_p$
+  - A field with finitely many elements
+    - Exists **only when** the number of elements is a power of a prime:
+      $$
+      |\mathbb{F}| = p^n
+      $$
+      where $p$ is a prime and $n \geq 1$
+
+
 
 ---
