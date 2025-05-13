@@ -75,7 +75,9 @@ Now, let's shift our focus to constructing such p-difference-universal $h$.
 note: There exist multiple methods for constructing such h (and F), but in this post I will shed light to a very elegant method. it uses concepts from a pure math topic, namely Abstract Algebra. first lets define the core structures that will be used in our formulation. The choice is not based on security measures, only on beauty. 
 
 
----## Algebraic Structures
+## Algebraic Structures
+
+I will now briefly define the nested algebraic structures from Abstract Algebra, which form the foundation needed to reach the structure used in constructing $\mathbb{F}_p$.
 
 - **Group**
   - A set $G$ with a binary operation $\cdot$ satisfying:
@@ -87,7 +89,6 @@ note: There exist multiple methods for constructing such h (and F), but in this 
   > - $(\mathbb{Z}, +)$ — identity: $0$, inverse: $-a$
   > - $(\mathbb{R} \setminus \{0\}, \cdot)$ — identity: $1$, inverse: $\frac{1}{a}$
 
----
 
 - **Abelian Group**
   - A group where the operation is commutative:
@@ -96,7 +97,6 @@ note: There exist multiple methods for constructing such h (and F), but in this 
     $$
   > Real Numbers under addition ($\mathbb{R}$, + ) forms an abelian group.
 
----
 
 - **Ring**
   - A set $R$ equipped with two operations: addition $(+)$ and multiplication $(\cdot)$
@@ -107,7 +107,6 @@ note: There exist multiple methods for constructing such h (and F), but in this 
       - $(a + b) \cdot c = a \cdot c + b \cdot c$
   > **Example**: $(\mathbb{Z}, +, \cdot)$ is a ring (but not a field).
 
----
 
 - **Commutative Ring**
   - A ring where multiplication is also commutative:
@@ -115,7 +114,6 @@ note: There exist multiple methods for constructing such h (and F), but in this 
     a \cdot b = b \cdot a
     $$
 
----
 
 - **Field**
   - A commutative ring $F$ where:
@@ -127,7 +125,6 @@ note: There exist multiple methods for constructing such h (and F), but in this 
     - Both $(F, +)$ and $(F \setminus \{0\}, \cdot)$ are abelian groups
   > **Examples**: $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{F}_p$
 
----
 
 - **Finite Field**
   - A field with finitely many elements
@@ -140,19 +137,32 @@ note: There exist multiple methods for constructing such h (and F), but in this 
   > - $\mathbb{F}_p$ — prime field of $p$ elements  
   > - $\mathrm{GF}(p^n)$ — Galois Field of size $p^n$
 
----
+#### Theorem: Roots of Polynomials over a Field
+
+Let $f(x)$ be a non-zero polynomial of degree $d$ over a field $\mathbb{F}$. Then:
+
+$$
+\text{The number of distinct roots of } f(x) \text{ in } \mathbb{F} \leq d
+$$
+
+In particular, if $\mathbb{F} = \mathbb{F}_p$ is a finite field with $p$ elements, then:
+
+$$
+f(x) \text{ has at most } d \text{ roots in } \mathbb{F}_p
+$$
 
 Now, that the groundwork is set. let's start designing the function we wanted.
 
---
+---
 
-let F be a finite Field, fix a point k in F and represent each message m as a polynomial of F (polynomial coefficient is taken from F)  
-define:
+Let $F$ be a finite field, and fix a point $k \in F$. Represent each message $m$ as a polynomial over $F$ (i.e., its coefficients are elements of $F$). 
+Define the function:
 $$
 h_k(m) := m(k)
 $$
-i.e., evaluate the message polynomial at point $k$.
+That is, evaluate the message polynomial at the point $k$.
 
+Precise definitions :
 ### Polynomial Encoding of Messages
 
 Fix a constant $\ell$, and define the message space as:
@@ -171,7 +181,7 @@ $$
 
 ### Keyed Function
 
-Define the keyed hash function:
+Define the keyed function h:
 $$
 h : \mathbb{F} \times \mathbb{F}^{<\ell} \to \mathbb{F}
 $$
@@ -181,21 +191,6 @@ $$
 h_k(m) := m(k)
 $$
 
----
-
-#### Theorem: Roots of Polynomials over a Field
-
-Let $f(x)$ be a non-zero polynomial of degree $d$ over a field $\mathbb{F}$. Then:
-
-$$
-\text{The number of distinct roots of } f(x) \text{ in } \mathbb{F} \leq d
-$$
-
-In particular, if $\mathbb{F} = \mathbb{F}_p$ is a finite field with $p$ elements, then:
-
-$$
-f(x) \text{ has at most } d \text{ roots in } \mathbb{F}_p
-$$
 
 ---
 
@@ -224,7 +219,8 @@ $$
 
 This means that $k$ is a **root** of the polynomial $p(x)$.
 
-From the **Roots of Polynomials Theorem**, we know that a degree-$\ell$ polynomial has at most $\ell$ roots over $\mathbb{F}$. If $k \in \mathbb{F}$ is chosen uniformly at random, then:
+From the **Roots of Polynomials Theorem**, we know that a degree-$\ell$ polynomial has at most $\ell$ roots over $\mathbb{F}$.
+Recall that $k \in \mathbb{F}$ is chosen uniformly at random, then:
 
 $$
 \Pr[p(k) = 0] \leq \frac{\ell}{|\mathbb{F}|}
@@ -236,15 +232,14 @@ $$
 \Pr[h_k(m_1) - h_k(m_2) = d] \leq \frac{\ell}{|\mathbb{F}|}
 $$
 
-Thus, the function $h_k$ is $\frac{\ell}{|\mathbb{F}|}$-difference-universal.
+Thus, the function $h_k$ is $\frac{\ell}{|\mathbb{F}|}$ -difference-universal.
 
----
+
 
 ## Strong Universality: A Stronger Guarantee
 
 In addition to difference-universality, we can construct families of functions with even stronger guarantees — known as **strongly universal functions**.
 
----
 
 ### Definition: Strongly Universal Function
 
@@ -256,8 +251,6 @@ $$
 \Pr_{k \in \mathcal{K}}[h_k(m) = t \;\land\; h_k(m') = t'] = \frac{1}{|\mathcal{T}|^2}
 $$
 
----
-
 ### Intuition
 
 A strongly universal function family ensures:
@@ -266,37 +259,32 @@ A strongly universal function family ensures:
 - The output of $h_k(m)$ is **uniformly random**
 - Knowing $h_k(m)$ reveals **no information** about $h_k(m')$
 
-This is strictly stronger than regular universality (which only controls collision probability).  
-Such functions are fundamental in cryptographic constructions requiring strong randomness guarantees — including the **Wegman–Carter MAC**.
-
----
 
 ## A Concrete Construction over $\mathbb{F}_p$
 
 We now define a strongly universal function family over the finite field $\mathbb{F}_p$.
 
-Each key is a pair $k = (a, b)$, where:
+define the key as a pair $k = (a, b)$, where:
 
 - $a \in \mathbb{F}_p^*$ (i.e., $a \ne 0$)
 - $b \in \mathbb{F}_p$
 
-The function is defined as:
-
+The keyed-function $h_k$ is defined as:
 $$
 h_{a,b}(x) = a \cdot x + b \mod p
 $$
 
----
 
 ### Strong Universality Guarantee
 
-For any distinct $x \ne x' \in \mathbb{F}_p$, and any $y, y' \in \mathbb{F}_p$, we have:
+Given $h_k$ defined above, for any distinct $x \ne x' \in \mathbb{F}_p$, and any $y, y' \in \mathbb{F}_p$, we have:
 
 $$
 \Pr_{a,b}[h_{a,b}(x) = y \;\text{ and }\; h_{a,b}(x') = y'] = \frac{1}{p^2}
 $$
 
 That is, the outputs for any two inputs are uniformly and independently distributed over $\mathbb{F}_p$.  
-Proof is straightforward: solve the system of two equations ($h_{a,b}(x) = y$ and $h_{a,b}(x') = y'$). There is only one $(a, b)$ satisfying both, and since $k$ is chosen uniformly over $\mathbb{F}_p^* \times \mathbb{F}_p$, we get the desired probability.
+
+> Proof is straightforward: solve the system of two equations ($h_{a,b}(x) = y$ and $h_{a,b}(x') = y'$). There is only one $(a, b)$ satisfying both, and since $k$ is chosen uniformly over $\mathbb{F}_p^* \times \mathbb{F}_p$, we get the desired probability.
 
 ---
