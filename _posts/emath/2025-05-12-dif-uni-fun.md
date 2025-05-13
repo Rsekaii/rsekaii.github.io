@@ -80,14 +80,14 @@ Now, let's shift our focus to constructing such p-difference-universal $h$.
 
 > at the end of the post, I will provide a list of nested algebraic structures from Abstract Algebra, which form the foundation needed to reach the structure used in our construction.
 
-### **Finite Field**  $\mathbb{F}_p$ :  A field with finitely many elements. it exists **only when** the number of elements is a power of a prime: 
+Definition $\mathbb{F}_p$ :  A field with finitely many elements. it exists **only when** the number of elements is a power of a prime: 
       $$
       |\mathbb{F}| = p^n
       $$
       where $p$ is a prime and $n \geq 1$
 
 
-### Theorem: Roots of Polynomials over a Field
+#### Theorem: Roots of Polynomials over a Field
 
 Let $f(x)$ be a non-zero polynomial of degree $d$ over a field $\mathbb{F}$ (coefficient of $f(x)$ come from $\mathbb{F}$) Then:
 
