@@ -29,11 +29,9 @@ $$
 Where:
 
 - $ m $: the message , $ k $: the secret key *  ,- $ \mathrm{MAC}_k $: the keyed MAC function
-- k is chosen uniformly from the Key-Space. Pr[k] = $\fracP1}{|\mathbb{K}|}$ for all k
+- k is chosen uniformly from the Key-Space. Pr[k] = ${\fracP1}{|\mathbb{K}|}$ for all k .
 
-- 
 
-  
 ---
 
 ## Key Definitions
