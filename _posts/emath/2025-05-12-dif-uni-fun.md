@@ -75,90 +75,71 @@ Now, let's shift our focus to constructing such p-difference-universal $h$.
 note: There exist multiple methods for constructing such h (and F), but in this post I will shed light to a very elegant method. it uses concepts from a pure math topic, namely Abstract Algebra. first lets define the core structures that will be used in our formulation. The choice is not based on security measures, only on beauty. 
 
 
----
-## Algebraic Structures
+---## Algebraic Structures
 
-### ➤ Group
-
-A **group** is a set $G$ with a binary operation $\cdot$ satisfying:
-
-- **Closure**: $a \cdot b \in G$
-- **Associativity**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
-- **Identity**: $\exists e \in G$ such that $a \cdot e = a$
-- **Inverses**: $\forall a \in G$, there exists $a^{-1} \in G$ such that $a \cdot a^{-1} = e$
-
-**Examples**:
-
-- $(\mathbb{Z}, +)$: identity is $0$, inverse of $a$ is $-a$
-- $(\mathbb{R} \setminus \{0\}, \cdot)$: identity is $1$, inverse of $a$ is $\frac{1}{a}$
+- **Group**
+  - A set $G$ with a binary operation $\cdot$ satisfying:
+    - **Closure**: $a \cdot b \in G$
+    - **Associativity**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
+    - **Identity**: $\exists e \in G$ such that $a \cdot e = a$
+    - **Inverses**: $\forall a \in G$, $\exists a^{-1} \in G$ such that $a \cdot a^{-1} = e$
+  > **Examples**:
+  > - $(\mathbb{Z}, +)$ — identity: $0$, inverse: $-a$
+  > - $(\mathbb{R} \setminus \{0\}, \cdot)$ — identity: $1$, inverse: $\frac{1}{a}$
 
 ---
 
-### ➤ Abelian Group
-
-A **group** $(G, +)$ is called **abelian** if:
-
-$$
-a + b = b + a
-$$
-
-That is, the operation is commutative.
+- **Abelian Group**
+  - A group where the operation is commutative:
+    $$
+    a + b = b + a
+    $$
+  > Every field under addition forms an abelian group.
 
 ---
 
-### ➤ Ring
-
-A **ring** $R$ is a set equipped with two operations $+$ and $\cdot$ such that:
-
-- $(R, +)$ is an abelian group
-- $\cdot$ is associative
-- **Distributive laws**:
-  - $a \cdot (b + c) = a \cdot b + a \cdot c$
-  - $(a + b) \cdot c = a \cdot c + b \cdot c$
-
----
-
-### ➤ Commutative Ring
-
-A **commutative ring** is a ring $R$ in which multiplication is also commutative:
-
-$$
-a \cdot b = b \cdot a
-$$
+- **Ring**
+  - A set $R$ equipped with two operations: addition $(+)$ and multiplication $(\cdot)$
+    - $(R, +)$ is an abelian group
+    - Multiplication is associative
+    - Distributive laws hold:
+      - $a \cdot (b + c) = a \cdot b + a \cdot c$
+      - $(a + b) \cdot c = a \cdot c + b \cdot c$
+  > **Example**: $(\mathbb{Z}, +, \cdot)$ is a ring (but not a field).
 
 ---
 
-### ➤ Field
-
-A **field** is a commutative ring $F$ where:
-
-- $1 \neq 0$
-- Every nonzero element has a multiplicative inverse:
-  $$
-  \forall a \in F \setminus \{0\}, \quad \exists a^{-1} \in F \text{ such that } a \cdot a^{-1} = 1
-  $$
-
-Which implies:
-
-- $(F, +)$ is an abelian group
-- $(F \setminus \{0\}, \cdot)$ is also an abelian group
+- **Commutative Ring**
+  - A ring where multiplication is also commutative:
+    $$
+    a \cdot b = b \cdot a
+    $$
+  > All fields are commutative rings, but not all commutative rings are fields.
 
 ---
 
-### ➤ Finite Field
+- **Field**
+  - A commutative ring $F$ where:
+    - $1 \neq 0$
+    - Every nonzero element has a multiplicative inverse:
+      $$
+      \forall a \in F \setminus \{0\}, \quad \exists a^{-1} \in F \text{ such that } a \cdot a^{-1} = 1
+      $$
+    - Both $(F, +)$ and $(F \setminus \{0\}, \cdot)$ are abelian groups
+  > **Examples**: $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{F}_p$
 
-A **finite field** (or **Galois field**) is a field with finitely many elements.
+---
 
-- A finite field exists **only when** the number of elements is a power of a prime:
-  $$
-  |\mathbb{F}| = p^n
-  $$
-  where $p$ is prime and $n \geq 1$
-
-**Notations**:
-
-- $\mathbb{F}_p$
-- $\mathrm{GF}(p^n)$
+- **Finite Field**
+  - A field with finitely many elements
+    - Exists **only when** the number of elements is a power of a prime:
+      $$
+      |\mathbb{F}| = p^n
+      $$
+      where $p$ is a prime and $n \geq 1$
+  > **Common Notations**:  
+  > - $\mathbb{F}_p$ — prime field of $p$ elements  
+  > - $\mathrm{GF}(p^n)$ — Galois Field of size $p^n$
 
 ---
 
