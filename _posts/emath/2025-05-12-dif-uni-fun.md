@@ -107,14 +107,6 @@ We now shall construct the function we want using the properties of a Finite Fie
 ## Representing Variable in $F$
 
 Let $F$ be a finite field, and fix a point $k \in F$. Represent each message $m$ as a polynomial over $F$ (i.e., its coefficients are elements of $F$). 
-Define the function:
-$$
-h_k(m) := m(k)
-$$
-That is, evaluate the message polynomial at the point $k$.
-
-Precise definitions :
-#### Polynomial Encoding of Messages
 
 Fix a constant $\ell$, and define the message space as:
 $$
@@ -141,6 +133,9 @@ by:
 $$
 h_k(m) := m(k)
 $$
+
+That is, evaluate the message polynomial at the point $k$.
+
 
 
 ---
@@ -183,9 +178,9 @@ $$
 \Pr[h_k(m_1) - h_k(m_2) = d] \leq \frac{\ell}{|\mathbb{F}|}
 $$
 
-Thus, the function $h_k$ is $\frac{\ell}{|\mathbb{F}|}$ -difference-universal.
+Therefore, the function $h_k$ is $\frac{\ell}{|\mathbb{F}|}$ -difference-universal.
 
-
+---
 
 ## Strong Universality: A Stronger Guarantee
 
