@@ -29,7 +29,9 @@ $$
 Where:
 
 - $ m $: the message , $ k $: the secret key *  ,- $ \mathrm{MAC}_k $: the keyed MAC function
-- $ \Pr[k] = \frac{1}{|K|} \quad \text{for all } k \in K $
+- k is chosen uniformly from the Key-Space. Pr[k] = $\fracP1}{|\mathbb{K}|}$ for all k
+
+- 
 
   
 ---
@@ -236,13 +238,13 @@ That is, the outputs for any two inputs are uniformly and independently distribu
 
 ## In Summary
 
-I’ve always appreciated the elegance of abstract algebra, but I never expected to see it come alive so vividly in a field as practical as cryptography.
+I’ve always appreciated the elegance of abstract algebra, but I never expected to see it applied in a field as practical as cryptography.
 
 In this moment, I was genuinely astonished. Not just by the utility, but by the *beauty* of it all.
 
 By embedding deep algebraic structure into our function designs, we’re able to build systems that are:
 
-- Predictable and analyzable, yet*mysterious and impenetrable to attackers
+- Predictable and analyzable, yet mysterious and impenetrable to attackers
 - Backed by formal proofs, not just hope or empirical strength
 - Elegant and reusable, with foundations rooted in pure mathematics
 
