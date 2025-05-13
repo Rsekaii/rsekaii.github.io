@@ -7,8 +7,9 @@ math: true
 
 ## Introduction
 
-Before diving into the elegant mathematics behind secure constructions, we first introduce key cryptographic concepts that motivate their formulation.
+While going through my career and research journey, I occasionally encounter a masterful application of something I once believed was purely an intellectual exercise. These moments stop me in my tracks, leaving me in awe and wonder. Today, I want to write about one such occurrence that happened recently. While reading Introduction to Modern Cryptography by Katz and Lindell, I was mesmerized by the beautiful application of abstract algebra in cryptographic constructions.
 
+Before diving into the elegant mathematics behind these secure designs, let’s first introduce the key cryptographic concepts that motivate their formulation.
 ---
 
 ## Message Authentication Codes (MAC)
@@ -232,6 +233,22 @@ That is, the outputs for any two inputs are uniformly and independently distribu
 > Proof is straightforward: solve the system of two equations ($h_{a,b}(x) = y$ and $h_{a,b}(x') = y'$). There is only one $(a, b)$ satisfying both, and since $k$ is chosen uniformly over $\mathbb{F}_p^* \times \mathbb{F}_p$, we get the desired probability.
 
 
+## In Summary
+
+I’ve always appreciated the elegance of abstract algebra, but I never expected to see it come alive so vividly in a field as practical as cryptography.
+
+In this moment, I was genuinely astonished. Not just by the utility, but by the *beauty* of it all.
+
+By embedding deep algebraic structure into our function designs, we’re able to build systems that are:
+
+- Predictable and analyzable, yet*mysterious and impenetrable to attackers
+- Backed by formal proofs, not just hope or empirical strength
+- Elegant and reusable, with foundations rooted in pure mathematics
+
+
+*This is a clear example of how pure maths becomes a powerful tool in a master's hands*
+
+---
 ---
 
 ## Algebraic Structures 
@@ -296,3 +313,4 @@ That is, the outputs for any two inputs are uniformly and independently distribu
 
 
 ---
+Bounds are easily testable on python, might do and share github link later
