@@ -76,7 +76,7 @@ Now, let's shift our focus to constructing such p-difference-universal $h$.
 > note: There exist multiple methods for constructing such h (and F), but in this post I will shed light to a very elegant method. it uses concepts from a pure math topic, namely Abstract Algebra. first lets define the core structures that will be used in our formulation. The choice is not based on security measures, only on beauty. 
 
 
-## Finite Fields $\mathbb{F}_p$ 
+## Finite Fields $\mathbb{F}_p$ &  it's properties
 
 > at the end of the post, I will provide a list of nested algebraic structures from Abstract Algebra, which form the foundation needed to reach the structure used in our construction.
 
