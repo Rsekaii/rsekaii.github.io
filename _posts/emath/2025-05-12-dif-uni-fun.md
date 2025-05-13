@@ -29,7 +29,7 @@ $$
 Where:
 
 - $ m $: the message , $ k $: the secret key *  ,- $ \mathrm{MAC}_k $: the keyed MAC function
-- k is chosen uniformly from the Key-Space. Pr[k] = ${\fracP1}{|\mathbb{K}|}$ for all k .
+- k is chosen uniformly from the Key-Space, Pr[k] = 1/ |K| for all k in key-space K.
 
 
 ---
@@ -236,9 +236,12 @@ That is, the outputs for any two inputs are uniformly and independently distribu
 
 ## In Summary
 
+The power of such formulation was not  clear to me at first (unlike its immediate beauty), but then it dawned on me. 
+*2 IS A PRIME!* This construction then allows us to use algebraic reasoning on binary bits {0,1}! 
+
 I’ve always appreciated the elegance of abstract algebra, but I never expected to see it applied in a field as practical as cryptography.
 
-In this moment, I was genuinely astonished. Not just by the utility, but by the *beauty* of it all.
+In this moment, I was genuinely astonished. Not just by the beauty, but also by the masterful application of pure maths
 
 By embedding deep algebraic structure into our function designs, we’re able to build systems that are:
 
