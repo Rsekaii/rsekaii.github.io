@@ -27,32 +27,24 @@ $$
 Where:
 
 - $ m $: the message , $ k $: the secret key *  ,- $ \mathrm{MAC}_k $: the keyed MAC function
+- $ \Pr[k] = \frac{1}{|K|} \quad \text{for all } k \in K $
 
-* always assume that k is chosen uniformly at random (Pr[any k] = 1 / |K| ,where K is key-space)
   
 ---
 
 ## Key Definitions
 
-### Pseudorandom Function (PRF)
+- **Pseudorandom Function (PRF)**: A function that takes a truly random seed (e.g., a key) and stretches it into a longer string that looks random.
 
-A function that takes a truly random seed (e.g., a key) and stretches it into a longer string that looks random.
+- **p-Difference-Universal Function**: A function $f$ is *p*-difference-universal if, for any distinct inputs $x_1 \neq x_2$ and any difference $d$, the probability that  
+  $f(x_1) - f(x_2) = d$  
+  is at most $p$. (Key idea: output differences are nearly uniform and unpredictable.)
 
-### p-Difference-Universal Function
-
-A function $ f $ is p-difference-universal if for any distinct inputs $ x_1 \neq x_2 $ and any difference $ d $, the probability that
-$$
-f(x_1) - f(x_2) = d
-$$
-is at most p.  
-Key Idea: Output differences are nearly uniform and unpredictable.
-
-### Strongly Secure MAC
-A MAC is strongly secure if it resists forgery even for an attacker that has access to any (m,t).
+- **Strongly Secure MAC**: A MAC is strongly secure if it resists forgery even for an attacker that has access to any number of valid $(m, t)$ pairs.
 
 ---
 
-## A Strongly Secure MAC Construction
+## A Strongly Secure MAC Sceme Construction
 
 Let $ h $ be an p-difference-universal function for negligible p, and let $ F $ be a pseudorandom function. Then the following defines a secure MAC for messages $ m \in \mathcal{M}_n $, where $ n $ is the security parameter.
 
@@ -60,81 +52,75 @@ Let $ h $ be an p-difference-universal function for negligible p, and let $ F $ 
 ### Step 1 — Key Generation
 Given input $1^n$:
 
-- Generate $k_h \in \mathcal{K}_n$ (key for $h$)  
-- Generate $k_F \in \{0,1\}^n$ (key for PRF)
-
-Output the key pair $k = (k_h, k_F) $
----
+- Generate $k_h \in \mathcal{K}_n$ (key for $h$) , $k_F \in \{0,1\}^n$ (key for PRF)
+- Output the key pair $k = (k_h, k_F) $
 
 ### Step 2 — Tag Generation (Mac)
 
 Given $(k_h, k_F)$ and message $m \in \mathcal{M}_n$, choose a random $r \in \{0,1\}^n$, and compute:
-
 $$
 t := \langle r,\; h_{k_h}(m) + F_{k_F}(r) \rangle
 $$
-> This step adds randomness via the PRF and applies the key-function on the message.
 
----
 
 ### Step 3 — Verification (Vrfy)
 
 Given $(k_h, k_F)$, $m$, and tag $t = \langle r, s \rangle$, output 1 if and only if:
-
 $$
 s = h_{k_h}(m) + F_{k_F}(r)
 $$
 
-Given $h$ be an p-difference-universal and $F$ be a pseudorandom function, it can be proven that the above is a strongly secure MAC scheme.
+Let $h$ be an p-difference-universal function, and $F$ be a pseudorandom function then it can be proven that the above is a strongly secure MAC scheme.
 Now, let's shift our focus to constructing such p-difference-universal $h$.
-
----
-
 note: There exist multiple methods for constructing such h (and F), but in this post I will shed light to a very elegant method. it uses concepts from a pure math topic, namely Abstract Algebra. first lets define the core structures that will be used in our formulation. The choice is not based on security measures, only on beauty. 
+
+
 ---
 ## Algebraic Structures
 
-### Group
+### ➤ Group
 
-A **group** is a set $G$ with a binary operation $\cdot$ such that:
+A **group** is a set $G$ with a binary operation $\cdot$ satisfying:
 
-- **Closure:** $a \cdot b \in G$  
-- **Associativity:** $(a \cdot b) \cdot c = a \cdot (b \cdot c)$  
-- **Identity:** $\exists e \in G$ with $a \cdot e = a$  
-- **Inverses:** $\forall a \in G, \exists a^{-1} \in G$ with $a \cdot a^{-1} = e$
+- **Closure**: $a \cdot b \in G$
+- **Associativity**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
+- **Identity**: $\exists e \in G$ such that $a \cdot e = a$
+- **Inverses**: $\forall a \in G$, there exists $a^{-1} \in G$ such that $a \cdot a^{-1} = e$
 
 **Examples**:
 
-- $(\mathbb{Z}, +)$: identity is 0, inverse of $a$ is $-a$  
-- $(\mathbb{R} \setminus \{0\}, \cdot)$: identity is 1, inverse of $a$ is $\frac{1}{a}$
+- $(\mathbb{Z}, +)$: identity is $0$, inverse of $a$ is $-a$
+- $(\mathbb{R} \setminus \{0\}, \cdot)$: identity is $1$, inverse of $a$ is $\frac{1}{a}$
 
 ---
 
-### Abelian Group
+### ➤ Abelian Group
 
-A group $(G, +)$ is **abelian** if:
+A **group** $(G, +)$ is called **abelian** if:
 
 $$
 a + b = b + a
 $$
 
+That is, the operation is commutative.
+
 ---
 
-### Ring
+### ➤ Ring
 
-A **ring** $R$ has two operations $+$ and $\cdot$ such that:
+A **ring** $R$ is a set equipped with two operations $+$ and $\cdot$ such that:
 
-- $(R, +)$ is an abelian group  
-- $\cdot$ is associative  
-- **Distributive laws:**
+- $(R, +)$ is an abelian group
+- $\cdot$ is associative
+- **Distributive laws**:
   - $a \cdot (b + c) = a \cdot b + a \cdot c$
   - $(a + b) \cdot c = a \cdot c + b \cdot c$
 
 ---
 
-### Commutative Ring
+### ➤ Commutative Ring
 
-A ring $R$ is **commutative** if:
+A **commutative ring** is a ring $R$ in which multiplication is also commutative:
 
 $$
 a \cdot b = b \cdot a
@@ -142,32 +128,36 @@ $$
 
 ---
 
-### Field
+### ➤ Field
 
-A **field** is a commutative ring $F$ where $1 \neq 0$, and every nonzero element has a multiplicative inverse:
+A **field** is a commutative ring $F$ where:
 
-$$
-\forall a \in F \setminus \{0\}, \; \exists a^{-1} \in F \text{ such that } a \cdot a^{-1} = 1
-$$
+- $1 \neq 0$
+- Every nonzero element has a multiplicative inverse:
+  $$
+  \forall a \in F \setminus \{0\}, \quad \exists a^{-1} \in F \text{ such that } a \cdot a^{-1} = 1
+  $$
 
-Then:
+Which implies:
 
-- $(F, +)$ is an abelian group  
+- $(F, +)$ is an abelian group
 - $(F \setminus \{0\}, \cdot)$ is also an abelian group
 
 ---
 
-### Finite Field
+### ➤ Finite Field
 
-A **finite field** (or **Galois field**) has finitely many elements. These exist only when the size is a power of a prime:
+A **finite field** (or **Galois field**) is a field with finitely many elements.
 
-$$
-|\mathbb{F}| = p^n
-$$
+- A finite field exists **only when** the number of elements is a power of a prime:
+  $$
+  |\mathbb{F}| = p^n
+  $$
+  where $p$ is prime and $n \geq 1$
 
-for some prime $p$ and integer $n \geq 1$. Common notations:
+**Notations**:
 
-- $\mathbb{F}_p$  
+- $\mathbb{F}_p$
 - $\mathrm{GF}(p^n)$
 
 ---
