@@ -8,8 +8,8 @@ math: true
 ## Introduction
 
 While going through my career and research journey, I occasionally encounter a masterful application of something I once believed was purely an intellectual exercise. These moments stop me in my tracks, leaving me in awe and wonder. Today, I want to write about one such occurrence that happened recently. While reading Introduction to Modern Cryptography by Katz and Lindell, I was mesmerized by the beautiful application of abstract algebra in cryptographic constructions.
-
 Before diving into the elegant mathematics behind these secure designs, let’s first introduce the key cryptographic concepts that motivate their formulation.
+
 ---
 
 ## Message Authentication Codes (MAC)
