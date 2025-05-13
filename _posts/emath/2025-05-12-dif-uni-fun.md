@@ -178,8 +178,6 @@ $$
 \Pr[h_k(m_1) - h_k(m_2) = d] \leq \frac{\ell}{|\mathbb{F}|}
 $$
 
-Therefore, the function $h_k$ is $\frac{\ell}{|\mathbb{F}|}$ -difference-universal.
-
 ---
 
 ## Strong Universality: A Stronger Guarantee
