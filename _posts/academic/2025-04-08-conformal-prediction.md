@@ -38,15 +38,15 @@ The following step-by-step framework helped me solidify the concept:
 
 3. **Calibration:** Use a *held-out calibration set* (not used for training) to compute the nonconformity scores. Then compute a quantile of those scores:
 
-   \[
+   $$
    \hat{q} = \text{Quantile}_{1 - \alpha} \left( \text{calibration scores} \right)
-   \]
+   $$
 
 4. **Prediction sets:** For a test input \\( x_{\text{test}} \\), the model outputs a distribution. We compute the nonconformity score for each possible label \\( y \\), and include all labels such that:
 
-   \[
+   $$
    C(x_{\text{test}}) = \{ y \mid s(f(x_{\text{test}}), y) \leq \hat{q} \}
-   \]
+   $$
 
    That’s our prediction set. We can say with \\(1 - \alpha\\) confidence that the true label lies within it.
 
@@ -54,18 +54,18 @@ The following step-by-step framework helped me solidify the concept:
 
 At first glance, this all feels like magic: you get valid uncertainty estimates, **without needing to model the data distribution**, and it works for any base model.
 
-But there's a catch — or two:
+But there's a catch or two:
 
-- The choice of the nonconformity score matters *a lot*. Even though coverage is guaranteed, the size of the prediction set — and its usefulness — depends entirely on this score.
+- The choice of the nonconformity score matters *a lot*. Even though coverage is guaranteed, the size of the prediction set and its usefulness depends entirely on this score.
 - The theoretical guarantees rely on a strong assumption: **exchangeability**.
 
 #### Exchangeability
 
 Exchangeability is a weaker assumption than i.i.d., but it's the key assumption underpinning conformal prediction. A sequence of random variables \\( Z_1, Z_2, \dots, Z_n \\) is said to be **exchangeable** if their joint distribution remains unchanged under any permutation:
 
-\[
+$$
 P(Z_1, \dots, Z_n) = P(Z_{\pi(1)}, \dots, Z_{\pi(n)}) \quad \text{for any permutation } \pi
-\]
+$$
 
 In simpler terms: the order in which data points appear doesn’t matter. All that matters is the set itself.
 
@@ -73,7 +73,7 @@ In simpler terms: the order in which data points appear doesn’t matter. All th
 
 Despite these caveats, conformal prediction still feels like the Central Limit Theorem’s cool cousin. It works when it really shouldn’t.
 
-I plan to continue testing conformal prediction in practice: classification, OOD data, different scores — you name it. Hopefully, through these experiments, I’ll gain better intuition and maybe stumble upon a research-worthy insight.
+I plan to continue testing conformal prediction in practice: classification, OOD data, different scores . Hopefully, through these experiments, I’ll gain better intuition and maybe stumble upon a research-worthy insight.
 
 Stay tuned.
 
@@ -169,7 +169,7 @@ I trained another basic CNN on CIFAR-10, used conformal prediction to estimate u
 
 similar to the previous one: three-layer CNN, 5 epochs, Adam optimizer. I split CIFAR-10 into 45k for training and 5k for calibration.
 
-I started with the same softmax-based score: \( 1 - p_{\text{true}} \). For \(\alpha = 0.1\), I got:
+I started with the same softmax-based score: $ 1 - p_{\text{true}} $. For $ \alpha = 0.1 $, I got:
 
 <pre><code>
 α = 0.10 → Coverage: 0.894, Avg Set Size: 1.76
@@ -180,7 +180,16 @@ Prediction sets with 3 entries: 1329
 </code></pre>
 
 Clearly, the model is less confident than on MNIST. Here's a plot showing which labels tend to result in larger prediction sets:
-(insert)
+
+<div style="display: flex; gap: 1rem;">
+  <img src="{{ '/images/CIFA10sets.png' | relative_url }}" alt="High noise" width="45%">
+</div>
+<p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">
+  Figure: True labels vs prediction set sizes (CIFAR-10).
+</p>
+
+
+
 
 Next, I tested on CIFAR-100 — completely different labels — using the same conformal setup:
 <pre><code>
@@ -189,11 +198,32 @@ Coverage: 0.03
 Top-1 probability on CIFAR-100: 0.661 ± 0.209
 ...
 </code></pre>
-(insert 2 image)
+
+<div style="display: flex; gap: 1rem;">
+  <img src="{{ '/images/CIFAidodsetss.png' | relative_url }}" alt="High noise" width="45%">
+</div>
+<p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">
+  Figure: Prediction set sizes for CIFAR-10 vs CIFAR-100.
+</p>
+
 
 Despite the low coverage (as expected), the model still returns small prediction sets on OOD data. First thing that comes to mind is to modify the model to increase its accuracy or maybe include a label that is made for unclear images.
 
 But what I wanted to do is test conformal prediction usefullness when dealing with OOD data, so I'll try another approach. The over confidence in predictions sets is an issue of CP implementation, more specifically our nonconformal score may not be sensitive enough leading to small prediction sets even when the model is wrong.
+
+<div style="display: flex; gap: 1rem;">
+  <img src="{{ '/images/ODDoc1.png' | relative_url }}" alt="High noise" width="45%">
+</div>
+<p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">
+  Figure: Examples of when the model was overconfident in its wrong predictions, sets with less than 2 labels using softmax scores (an orange being labeled as either a frog or a dog — “overconfident” is an understatement).
+</p>
+
+<div style="display: flex; gap: 1rem;">
+  <img src="{{ '/images/ODDoc2.png' | relative_url }}" alt="High noise" width="45%">
+</div>
+<p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">
+  Figure: More examples of overconfidence when using softmax scores, King of the jungle is offended.
+</p>
 
 So lets look for a more sensitive score, that should make our prediction sets deal with OOD data with more caution.
 
@@ -240,9 +270,9 @@ So margin score is definitely more cautious since it inflates the set size aggre
 
 While working on the margin score, I thought: instead of comparing just the top two probabilities, why not measure the full uncertainty? If margin score measures the spread of the model's top two predictions, is there a way to capture the full spread of all output probabilities ? Enter entropy.
 
-\[
+$$
 H(p) = -\sum_i p_i \log(p_i)
-\]
+$$
 
 Entropy captures how “spread out” the probability distribution of the predicted label is:
 
@@ -281,12 +311,26 @@ CIFAR-100 → Avg Set Size: 8.78
 
 </code></pre>
 
-Here’s the issue: even for confident predictions, entropy takes a while to “approve” a small set. It accumulates slowly when probabilities are concentrated. For example, \([0.90, 0.05, \dots]\) still requires multiple labels before entropy passes the threshold.
+Here’s the issue: even for confident predictions, entropy takes a while to “approve” a small set. It accumulates slowly when probabilities are concentrated. For example, \([0.90, 0.05, ...]\) still requires multiple labels before entropy passes the threshold.
 
 ---
 
 ## Conclusion
 
 This shows that the choice of nonconformity score really matters. All scores satisfy the conformal guarantee, but they behave very differently in practice. Especially when it comes to how they respond to model uncertainty.
-(insert images)
+
+<div style="display: flex; gap: 1rem;">
+  <img src="{{ '/images/CIFApredid.png' | relative_url }}" alt="High noise" width="45%">
+</div>
+<p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">
+  Figure: {Average prediction set size vs \(\alpha\), CIFAR-10 (in-distribution).
+</p>
+
+<div style="display: flex; gap: 1rem;">
+  <img src="{{ '/images/CIFApredood.png' | relative_url }}" alt="High noise" width="45%">
+</div>
+<p style="font-size: 0.9rem; color: #666; margin-top: 0.2rem;">
+  Figure: Average prediction set size vs \(\alpha\), CIFAR-100 (out-of-distribution).
+</p>
+
 
