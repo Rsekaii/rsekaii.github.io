@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+
+  {%- include head.html -%}
+
+  <body class="{% if page.layout == 'post' %}post-page{% endif %}">
+    {%- include header.html -%}
+
+    <!-- Mobile Home Button -->
+    <div class="mobile-home-button">
+      <a href="/" title="Home">🏠</a>
+    </div>
+
+    <main class="page-content" aria-label="Content">
+      <div class="layout-wrapper" style="display: flex; gap: 40px; max-width: 1200px; margin: 0 auto;">
+
+        <!-- Left Sidebar (Contact Info) -->
+        <aside class="sidebar" style="flex: 0.7; position: sticky; top: 100px;">
+          {% include contact.html %}
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content intro" style="flex: 3.3; padding-left: 10px; padding-right: 10px;">
+          {{ content }}
+        </div>
+
+      </div>
+    </main>
+
+    {%- include footer.html -%}
+  </body>
+
+</html>
