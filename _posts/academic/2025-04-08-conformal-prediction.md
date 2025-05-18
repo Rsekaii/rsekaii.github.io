@@ -7,126 +7,286 @@ math: true
 
 ## Conformal Prediction
 
-Conformal prediction is a methodology for quantifying uncertainty and producing prediction intervals — similar in spirit to confidence intervals.
+Conformal prediction (CP) is a method to quantify predictive uncertainty. It gives you prediction sets or intervals that come with guaranteed coverage — even when we don’t know the underlying distribution.
 
-Before diving into it, it’s important to understand a key idea:
-
----
+Before diving in, I had to wrap my head around a new concept: the **scoring rule**.
 
 ### Scoring Rule
 
-A **scoring rule** evaluates how well a predicted probability distribution aligns with an observed value.
+A scoring rule tells us how good our probabilistic predictions are. It compares what the model *believed would happen* versus what *actually happened*.
 
-This concept is related to, but distinct from:
+This concept felt a bit redundant at first — like, isn't this just a loss function? Or maybe accuracy? But I came to understand they serve different goals:
 
-- **Loss Functions**: Penalize prediction errors during training.
-- **Scoring Functions**: Summarize model performance (like accuracy).
-- **Scoring Rules**: Evaluate probabilistic forecasts directly.
+- **Loss Function:** Used during training — it penalizes the difference between predicted and true values.
+- **Scoring Rule:** Evaluates probabilistic predictions (like full softmax vectors), measuring how well the predicted distribution matches reality.
+- **Scoring Function:** Used more loosely, often referring to evaluation metrics like accuracy or F1.
 
----
+[Note: While I initially thought the nonconformity score in CP is a scoring rule, I later learned it's not quite the same — it's just a function used to measure how “strange” a prediction is. It doesn’t have to be proper or differentiable like formal scoring rules.]
 
-## Understanding Conformal Prediction
+### Understanding Conformal Prediction
 
-The paper "A Tutorial on Conformal Prediction" by the authors Vovk, Gammerman, and Shafer (who were the orignators of the concept)
-is a thorough paper for anyone interested, they also gracefull made a supplementary video breaking it down.
-However, here I try to explain it in my own words. So don't expect the same level of detail.
-
----
+After reading a few technical papers (and finding a really helpful YouTube explainer — shoutout to the authors!), I’ll try to describe what I understood in my own words. If I can explain it, I probably understand it — right?
 
 ### Conformal Prediction Pipeline
 
-The pipeline helped make the method intuitive:
+The following step-by-step framework helped me solidify the concept:
 
-1. **Define Uncertainty**  
-   We begin by deciding what "uncertainty" we want to quantify from our model.
+1. **Define uncertainty:** Pick a way to measure how “uncertain” a prediction is. This could be low softmax probability for the true class, or any other measure capturing the model's confidence.
+2. **Choose a nonconformity score:** This function takes in the model's output and a label, and tells you how “nonconforming” or odd the prediction is. The higher the score, the more uncertain.
 
-2. **Score Function**  
-   A nonconformity score function is used to quantify how far a predicted value is from the true value. A well-designed score function gives:
+   (Yes, it's called a “score,” but it’s unrelated to scoring rules in the probabilistic forecast sense.)
 
-   $$
-   s(\hat{y}, y)
-   $$
+3. **Calibration:** Use a *held-out calibration set* (not used for training) to compute the nonconformity scores. Then compute a quantile of those scores:
 
-   Higher scores → more uncertainty. Lower scores → greater conformity.
+   \[
+   \hat{q} = \text{Quantile}_{1 - \alpha} \left( \text{calibration scores} \right)
+   \]
 
-   > ⚠️ Note: This “score function” differs from the Fisher score or scoring rule — terminology can be confusing.
+4. **Prediction sets:** For a test input \\( x_{\text{test}} \\), the model outputs a distribution. We compute the nonconformity score for each possible label \\( y \\), and include all labels such that:
 
-3. **Calibration Scores and Quantile Threshold**  
-   Using a **calibration set**, we compute scores and determine the quantile threshold:
+   \[
+   C(x_{\text{test}}) = \{ y \mid s(f(x_{\text{test}}), y) \leq \hat{q} \}
+   \]
 
-   $$
-   \hat{q} = \frac{(n+1)(1-\alpha)}{n}
-   $$
+   That’s our prediction set. We can say with \\(1 - \alpha\\) confidence that the true label lies within it.
 
-   For instance, \( \alpha = 0.05 \) gives a 95% confidence level.  
-   Now \( \hat{q} \) is the threshold such that ~95% of calibration scores fall below it.
+### Critical Considerations
 
-4. **Prediction Set**  
-   Given a test point, we define the prediction set as:
+At first glance, this all feels like magic: you get valid uncertainty estimates, **without needing to model the data distribution**, and it works for any base model.
 
-   $$
-   C(X_{\text{test}}) = \{ y \mid s(\hat{y}_{\text{test}}, y) \leq \hat{q} \}
-   $$
+But there's a catch — or two:
 
-   This means: with 95% confidence, the true \( y \) is in this prediction set.
+- The choice of the nonconformity score matters *a lot*. Even though coverage is guaranteed, the size of the prediction set — and its usefulness — depends entirely on this score.
+- The theoretical guarantees rely on a strong assumption: **exchangeability**.
 
----
+#### Exchangeability
 
-## Key Takeaways
+Exchangeability is a weaker assumption than i.i.d., but it's the key assumption underpinning conformal prediction. A sequence of random variables \\( Z_1, Z_2, \dots, Z_n \\) is said to be **exchangeable** if their joint distribution remains unchanged under any permutation:
 
-Conformal prediction is **model-agnostic** and **distribution-free**.
+\[
+P(Z_1, \dots, Z_n) = P(Z_{\pi(1)}, \dots, Z_{\pi(n)}) \quad \text{for any permutation } \pi
+\]
 
-However, success depends on:
+In simpler terms: the order in which data points appear doesn’t matter. All that matters is the set itself.
 
-- A well-chosen score function
-- The assumption that data is exchangeable
---
-### What is Exchangeability?
+### Next Steps
 
-In probability, a sequence of random variables is **exchangeable** if the joint distribution does not change when the order of the variables is shuffled.
+Despite these caveats, conformal prediction still feels like the Central Limit Theorem’s cool cousin. It works when it really shouldn’t.
 
-Formally:
+I plan to continue testing conformal prediction in practice: classification, OOD data, different scores — you name it. Hopefully, through these experiments, I’ll gain better intuition and maybe stumble upon a research-worthy insight.
 
-$$
-P(X_1, X_2, \dots, X_n) = P(X_{\pi(1)}, X_{\pi(2)}, \dots, X_{\pi(n)})
-$$
-for any permutation $ \pi $ of indices.
-
-This is **weaker than the i.i.d. assumption** — all i.i.d. sequences are exchangeable, but not all exchangeable sequences are i.i.d.
-
-**Why it matters:**  
-Conformal prediction only requires exchangeability, not full independence, making it more broadly applicable in real-world data where some dependencies exist.
-
-
+Stay tuned.
 
 ---
 
-## Application: Tumor Segmentation
+## Conformal Prediction with a CNN on MNIST
 
-One practical application shared by the authors involves detecting gut polyps from endoscopy images.
+We begin with a foundational experiment using the well-known MNIST dataset, which consists of grayscale images of handwritten digits (0–9). The data is originally split into 60,000 training and 10,000 test samples. I further split the training set into 50,000 samples for training and 10,000 for calibration, which are used exclusively for conformal prediction.
 
-### Procedure Summary
+To classify digits, I trained a simple convolutional neural network (CNN). It’s a small one: just two convolutional layers followed by a couple of dense layers.
 
-- A subset of the data is used for calibration.
-- A **target TPR (True Positive Rate)** of \( 1 - \alpha \) is set.
-- FNR is defined as:
+```python
+class CNN(nn.Module):
+    def __init__(self):
+        super(CNN, self).__init__()
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=3)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3)
+        self.fc1 = nn.Linear(9216, 128)
+        self.fc2 = nn.Linear(128, 10)
 
-$$
-\text{FNR} = 1 - \frac{\sum (\text{Predicted Mask} \cap \text{Ground Truth Mask})}{\sum (\text{Ground Truth Mask})}
-$$
+    def forward(self, x):
+        x = F.relu(self.conv1(x))       # Output: 26x26
+        x = F.relu(self.conv2(x))       # Output: 24x24
+        x = F.max_pool2d(x, 2)          # Output: 12x12
+        x = torch.flatten(x, 1)
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
+        return x
+```
 
-- Softmax scores are used as uncertainty scores.
-- A threshold \( \lambda_{\text{hat}} \) is computed using **Brent’s method**:
+I trained this model for five epochs using Adam and cross-entropy loss. Once trained, I used it to generate predictions on both the calibration and test sets. The outputs are logits, which are turned into probabilities using the softmax function.
 
-$$
-\text{FNR}(\lambda) - \left(\frac{n+1}{n} \alpha - \frac{1}{n}\right) = 0
-$$
+To build conformal prediction sets, I used a simple nonconformity score: \\( 1 - p_y \\), where \\( p_y \\) is the model’s probability for the correct class. Intuitively, this score gets smaller when the model is confident, and larger when it's unsure.
 
-- Applying $ \lambda_{\text{hat}} $ yields segmentation masks that satisfy the desired confidence level.
+```python
+def get_softmax_scores(loader):
+    model.eval()
+    all_probs = []
+    all_labels = []
+    with torch.no_grad():
+        for x, y in loader:
+            x = x.to(device)
+            logits = model(x)
+            probs = F.softmax(logits, dim=1).cpu().numpy()
+            all_probs.append(probs)
+            all_labels.append(y.numpy())
+    return np.vstack(all_probs), np.concatenate(all_labels)
+
+```
+
+Then, I calculated the nonconformity scores for the calibration set, and for different confidence levels, I constructed prediction sets using the \\( (1 - \alpha) \\)-quantile.
+
+```python
+cal_nonconformity = 1 - np.array([p[y] for p, y in zip(cal_probs, cal_labels)])
+def predict_sets(probs, threshold):
+    return [np.where(1 - p <= threshold)[0] for p in probs]
+
+alphas = [0.05, 0.1, 0.15]
+for alpha in alphas:
+    q = np.quantile(cal_nonconformity, 1 - alpha)
+    pred_sets = predict_sets(test_probs, q)
+    coverage = np.mean([y in s for y, s in zip(test_labels, pred_sets)])
+    avg_size = np.mean([len(s) for s in pred_sets])
+    print(f"α={alpha:.2f} => Coverage: {coverage:.3f}, Avg Set Size: {avg_size:.2f}")
+
+```
+**Example Output:**
+<pre><code>
+α = 0.05 → Coverage: 0.957, Avg Set Size: 0.96
+α = 0.10 → Coverage: 0.910, Avg Set Size: 0.91
+α = 0.15 → Coverage: 0.865, Avg Set Size: 0.87
+</code></pre>
+
+
+
+The average prediction set size is under 1 which makes sense. Most predictions are confident, returning a single label. A few are highly uncertain and
+return empty sets. Here’s how many predictions had which set sizes for α = 0.1
+
+<pre><code>
+Prediction sets with 0 entries: 892
+Prediction sets with 1 entries: 9108
+</code></pre>
+
+So far, things are behaving just as expected. Coverage is on target, and set sizes reflect the model’s confidence.
+
+
+## CIFAR Experiments
+
+Now for something more challenging. I ran the same experiment setup on CIFAR, which is a colorful image classification dataset.
+I trained another basic CNN on CIFAR-10, used conformal prediction to estimate uncertainty, and then pushed it a bit further by testing on CIFAR-100 — totally out-of-distribution (OOD).
+
+## Softmax Score
+
+similar to the previous one: three-layer CNN, 5 epochs, Adam optimizer. I split CIFAR-10 into 45k for training and 5k for calibration.
+
+I started with the same softmax-based score: \( 1 - p_{\text{true}} \). For \(\alpha = 0.1\), I got:
+
+<pre><code>
+α = 0.10 → Coverage: 0.894, Avg Set Size: 1.76
+Prediction sets with 1 entries: 5186
+Prediction sets with 2 entries: 2836
+Prediction sets with 3 entries: 1329
+...
+</code></pre>
+
+Clearly, the model is less confident than on MNIST. Here's a plot showing which labels tend to result in larger prediction sets:
+(insert)
+
+Next, I tested on CIFAR-100 — completely different labels — using the same conformal setup:
+<pre><code>
+OOD (CIFAR-100) → Avg Prediction Set Size: 2.63
+Coverage: 0.03
+Top-1 probability on CIFAR-100: 0.661 ± 0.209
+...
+</code></pre>
+(insert 2 image)
+
+Despite the low coverage (as expected), the model still returns small prediction sets on OOD data. First thing that comes to mind is to modify the model to increase its accuracy or maybe include a label that is made for unclear images.
+
+But what I wanted to do is test conformal prediction usefullness when dealing with OOD data, so I'll try another approach. The over confidence in predictions sets is an issue of CP implementation, more specifically our nonconformal score may not be sensitive enough leading to small prediction sets even when the model is wrong.
+
+So lets look for a more sensitive score, that should make our prediction sets deal with OOD data with more caution.
+
+
+## Margin Score
+
+So I tried something more reactive and sensitive to the model’s uncertainty: the \textbf{margin score}. It’s defined as the difference between the top-1 and top-2 predicted probabilities. The smaller this margin, the more uncertain the model is assumed to be.
+And prediction sets are built by checking how close other classes are to the top-1.
+
+To clarify with an example, suppose we are testing two new images, A and B, and the model returns the following probability distributions:
+**Example:**
+
+- Image A: {0.01, 0.90, 0.05, 0.04} → margin = 0.90 - 0.05 = 0.85  
+- Image B: {0.20, 0.10, 0.40, 0.30} → margin = 0.40 - 0.30 = 0.10
+
+> *Note: Upon reflection, this is clearly not a valid nonconformity score. But I’m keeping it here for the sake of documenting the progression of my experiments.*
+
+```python
+cal_nonconformitym = np.array([
+    np.sort(p)[-1] - np.sort(p)[-2]
+    for p in cal_probs
+])
+def predict_sets_margin(probs, threshold):
+    sets = []
+    for p in probs:
+        top1 = np.max(p)
+        pred_set = np.where((top1 - p) <= threshold)[0]
+        sets.append(pred_set)
+    return sets
+```
+
+Rsults : 
+
+<pre><code>
+CIFAR-10 → Avg Set Size: 8.93
+CIFAR-100 → Avg Set Size: 9.94
+</code></pre>
+
+So margin score is definitely more cautious since it inflates the set size aggressively, even for in-distribution data. But it's more sensitive to OOD uncertainty, which we wanted. However, it does not seem worth the price. 
+
+
+
+## Entropy Score
+
+While working on the margin score, I thought: instead of comparing just the top two probabilities, why not measure the full uncertainty? If margin score measures the spread of the model's top two predictions, is there a way to capture the full spread of all output probabilities ? Enter entropy.
+
+\[
+H(p) = -\sum_i p_i \log(p_i)
+\]
+
+Entropy captures how “spread out” the probability distribution of the predicted label is:
+
+- Sharp peaks → model is confident → low entropy  
+- Flat predictions → model is uncertain → high entropy
+
+```python
+def entropy(p):
+    return -np.sum(p * np.log(p + 1e-12))
+
+cal_non_e = np.array([entropy(p) for p in cal_probs])
+q_e = np.quantile(cal_non_e, 1 - alpha)
+```
+After defining entropy, we use it as a conformal score by computing the entropy of each sample in the calibration set. We then determine the appropriate threshold (quantile) from these calibration scores.
+
+To construct the prediction sets for new samples, we sort the predicted probabilities in descending order. Starting from the highest, we incrementally include class probabilities one by one, recalculating the cumulative entropy at each step. We stop once the entropy exceeds the predefined threshold.
+
+```python
+def pred_entropy_thresholded(probs, entropy_thresh):
+    sets = []
+    for p in probs:
+        sorted_indices = np.argsort(p)[::-1]
+        cumulative_p = [], cumulative_entropy = 0 , current_set = []
+        for idx in sorted_indices:
+            pi = p[idx] , cumulative_p.append(pi)
+            cumulative_entropy = -np.sum(np.array(cumulative_p) * np.log(np.array(cumulative_p) + 1e-12))
+            current_set.append(idx) , if cumulative_entropy > entropy_thresh:
+                break
+        sets.append(current_set), return sets
+```
+**Results:**
+
+<pre><code>
+CIFAR-10 → Avg Set Size: 9.52
+CIFAR-100 → Avg Set Size: 8.78
+
+</code></pre>
+
+Here’s the issue: even for confident predictions, entropy takes a while to “approve” a small set. It accumulates slowly when probabilities are concentrated. For example, \([0.90, 0.05, \dots]\) still requires multiple labels before entropy passes the threshold.
 
 ---
 
-## Final Thoughts
+## Conclusion
 
-Despite its simplicity, conformal prediction delivers surprisingly powerful results. Its guarantee of coverage, even without assumptions about the model or distribution, makes it one of the most elegant tools in the uncertainty quantification toolbox.
+This shows that the choice of nonconformity score really matters. All scores satisfy the conformal guarantee, but they behave very differently in practice. Especially when it comes to how they respond to model uncertainty.
+(insert images)
 
