@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Message Authentication Codes and Their Algebraic Elegance"
+title: "MAC and Their Algebraic Elegance"
 date: 2025-05-12
 math: true
 ---
