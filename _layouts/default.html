@@ -71,6 +71,21 @@
               </li>
             {% endfor %}
           </ul>
+
+          <!-- NEW: Journal -->
+          <h3 style="margin-bottom: 10px; margin-top: 30px;">Journal</h3>
+          <p style="margin-top: 0; font-size: 0.85em; color: #555;">
+            Personal notes, reflections, and small ideas I want to remember.
+          </p>
+          <ul class="post-list" style="list-style: none; padding-left: 0;">
+            {% assign journal_posts = site.posts | where_exp: "post", "post.path contains '/journal/'" %}
+            {% for post in journal_posts %}
+              <li style="margin-bottom: 10px;">
+                <a href="{{ post.url }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
         </aside>
 
       </div>
