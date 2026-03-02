@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body class="{% if page.layout == 'post' %}post-page{% endif %}">
+    {%- include header.html -%}
+
+    <!-- Mobile Home Button -->
+    <div class="mobile-home-button">
+      <a href="/" title="Home">🏠</a>
+    </div>
+
+    <main class="page-content" aria-label="Content">
+      <div class="layout-wrapper" style="display: flex; gap: 40px; max-width: 1200px; margin: 0 auto;">
+
+        <!-- Left Sidebar (Contact Info) -->
+        <aside class="sidebar" style="flex: 0.8; position: sticky; top: 100px;">
+          {% include contact.html %}
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content intro" style="flex: 2.5; padding-left: 10px; padding-right: 10px;">
+          {{ content }}
+        </div>
+
+        <!-- Right Sidebar (Posts) -->
+        <aside class="right-sidebar post-list" style="flex: 1.2; position: sticky; top: 100px;">
+          <!-- Mobile-only About Me post -->
+          <ul class="aboutme-mobile-only" style="list-style: none; padding-left: 0; margin-top: 30px;">
+            {% for post in site.posts %}
+              {% if post.path contains 'aboutme' %}
+                <li style="margin-bottom: 10px;">
+                  <a href="{{ post.url }}">👤 {{ post.title }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+
+          <h3 style="margin-bottom: 10px;">Academic Pursuit</h3>
+          <p style="margin-top: 0; font-size: 0.85em; color: #555;">
+            Posts exploring theoretical and technical topics from my academic pursuit.
+          </p>
+          <ul class="post-list" style="list-style: none; padding-left: 0;">
+            {% assign academic_posts = site.posts | where_exp: "post", "post.path contains '/academic/'" %}
+            {% for post in academic_posts %}
+              <li style="margin-bottom: 10px;">
+                <a href="{{ post.url }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <h3 style="margin-bottom: 10px; margin-top: 30px;">Personal Projects</h3>
+          <p style="margin-top: 0; font-size: 0.85em; color: #555;">
+            Personal attempts to apply what I learn to real-world challenges.
+          </p>
+          <ul class="post-list" style="list-style: none; padding-left: 0;">
+            {% assign personal_posts = site.posts | where_exp: "post", "post.path contains '/personal/'" %}
+            {% for post in personal_posts %}
+              <li style="margin-bottom: 10px;">
+                <a href="{{ post.url }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </aside>
+
+      </div>
+    </main>
+
+    {%- include footer.html -%}
+  </body>
+
+</html>
