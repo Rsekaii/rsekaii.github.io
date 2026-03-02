@@ -2,6 +2,7 @@
 layout: post
 title: "Recognition and Validation"
 date: 2026-03-02
+math: true
 ---
 For my first journal entry, I want to reflect on an encounter I recently had that made me feel validated and raised my morale and confidence level to where I used to be. I was recently shortlisted for an interview at a company that I had previously attempted to join, and consider one of the best career moves I can make if I get the chance. Because the process is yet to be finalized, I will name the company X. But know that it trades oil commodities.
 
