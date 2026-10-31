@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Always Conncted"
+date: 2026-10-31
+math: false
+---
+
+to be always connected is to lose what makes oneself. We are living in the age of connected-ness. and i can't help but feel we are losing something. Gone are the days of disconnecting and being cut from everyone else. I remember being left in the USA with little to no connection to my family and home, how scared I was and how it forced me to interact with strangers. Comparing it with my little brother who is now in Syndey and feels as close as my other siblings who live in my area. It doesn't feel like Mtawa left, he is always easy to reach (a call away, a flight away). Every holiday he comes back. There is no need for him to mingle and learn from different cultures, why? he never felt. 
+
+Flying is rarely a pleasant experience, but I always used the time to watch movies from my to-watch backlog (or what is available on the plane at least) or occasionally I bring a book that I read on a long flight. Forced between a movie and a book, which both are enriching when compared to my latest flight where wifi was accessable.. I was back home. watched the same videos, followed the same routine, and talked to the same people. The occasional wifi interruption made me realize I'm in the air, otherwise it's as if I never left. The plane is the airport is the destination is home. it is all one. 
+
+My friend Abdulla traveled to Japan pre-social media, and he talked about the culture-shock he faced. how everything feels strange and exciting, how food tasted different from everything he knew. Compared to my Japan experience, it didn't feel the same even when I intentionally didn't research prior. I loved my time in Tokyo, but it was within expectation. I didn't plan anything and was discovering everything for the first time, but it didn't punch like he explained. I hate that everything was within my expectation, will definitely visit Tokyo again.
+
+The promise of globalization to connect different cultures was overtaken by the creation of what Byung-Chul Han named the Hyperculture. Hyperculture is the overarching culture of the connected globe, differences are juxtaposed and celebrated but never erased. The melting pot was abandoned and introduced the buffet, where one is free to pick and choose between different aspects of different cultures to satisfy any need/want. Boundaries are not melted but bypassed. It is not just a liberating reality but a culture dis-rooting one. Culture is not bound by physical boundaries, it is projected to the hyper-real. Hyperculture is made available by the connectedness of the modern era. There is no here and there anymore, there is always Here. Travelling and tourism is transformed, a tourist is now travelling between events and occurrences not places and cultures.
+
+Being a part of this Hyper culture means one can experience other cultures while not leaving. Optimists missed the mark on globalization, we didn't become one culture. Connectivity created silos. If I can choose what I experience and pick my encounters carefully, what will force my growth? Will I ever leave my comfort-zone? Can I leave? This is new for humanity to contend with. Pilgrims grew and changed because they had to face a long and difficult journey, and most importantly they were away. Travelling was a mind opening experience because of the uncertainty and separation, now it's a planned experience while connected. Everything is accessible and pilgrimage is another prayer. People now travel to do things they planned to do prior, what more is there? sushi is sold in baniyas.
+
+To be disconnected is a privilege nowadays, to be connected is the norm. It is always expected for me to answer when someone calls, reply when someone messages. It feels unhealthy. There is no room for me to grow unto something, fuck there is no rooms just the all-connected space. I do believe that to know oneself one must isolate and free his mind from attachments and other people's projections and expectations. But such isolation is a privilege. The right to oblivion is forgone, cometh the right to put a headphone in the gym with nothing on. 
+
+
